@@ -25,7 +25,7 @@ export default function FirstStep({
         <p style={{ marginBottom: "10px", fontSize: "12px" }}>
           El nombre de tu mascota es importante a la hora de personalizar algun
           producto, sin embargo, si no tienes ningun nombre simplemente dale en
-          "Saltar"
+          &quot;Saltar&quot;
         </p>
         <input
           type="text"
@@ -38,7 +38,7 @@ export default function FirstStep({
             border: "none",
             outline: "1px solid #dedede",
             borderRadius: "4px",
-            color: "var(--atext-color)",
+            color: "var(--text-color)",
           }}
           onChange={onChangePetName}
         ></input>
