@@ -16,7 +16,7 @@ export default function SelectedProduct({
   const [isCustomizing, setIsCustomizing] = useState(false);
   //const { setOrderData, orderData } = useShopServicesUserData();
   const [photopeaString, setPhotopeaString] = useState("");
-  const [iframeKey, setIframeKey] = useState(0); // Key to force iframe re-render
+  const [designId, setDesignId] = useState(0); // Key to force iframe re-render
   const [newImageUrl, setNewImageUrl] = useState("");
 
   async function handleMessage(event) {
@@ -65,7 +65,10 @@ export default function SelectedProduct({
   }, []);
 
   const assignDesingToProductHandler = async (designId) => {
-    //const clientSession = getCookie("clientSession");
+    setDesignId(designId);
+  };
+
+  useEffect(() => {
     const petName =
       petData.petName.length > 0 ? petData.petName : "Nombre mascota";
     const config = {
@@ -83,8 +86,7 @@ export default function SelectedProduct({
     const configString = JSON.stringify(config);
     const encodedConfig = encodeURIComponent(configString);
     setPhotopeaString(encodedConfig);
-    setIframeKey(Date.now()); // Update iframe key to force re-render
-  };
+  }, [photopeaString, designId]);
 
   const closeCustomizeWindow = () => {
     setIsCustomizing(false);
@@ -94,7 +96,7 @@ export default function SelectedProduct({
     <>
       {photopeaString && (
         <iframe
-          key={iframeKey} // Use the key to force re-render
+          key={designId} // Use the key to force re-render
           src={`https://www.photopea.com#${photopeaString}`}
           style={{
             width: "100%",
