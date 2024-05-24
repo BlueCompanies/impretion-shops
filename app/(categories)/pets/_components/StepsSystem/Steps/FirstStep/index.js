@@ -40,6 +40,7 @@ export default function FirstStep({
             borderRadius: "4px",
             color: "var(--text-color)",
           }}
+          value={petData.petName}
           onChange={onChangePetName}
         ></input>
 

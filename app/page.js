@@ -1,6 +1,7 @@
 import styles from "./styles.module.css";
 import { getShopData } from "./_lib/shopDataFetch/getShopData";
 import Link from "next/link";
+import CustomerOrder from "./(categories)/pets/_components/CustomerOrder";
 
 export const runtime = "edge";
 
@@ -132,6 +133,8 @@ export default async function PrincipalPage({ searchParams }) {
             </div>
           </div>
         </div>
+
+        <CustomerOrder mode={2} />
       </main>
     );
   } else {

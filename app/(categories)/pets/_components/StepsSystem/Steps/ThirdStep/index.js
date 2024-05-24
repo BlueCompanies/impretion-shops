@@ -1,5 +1,7 @@
+import Link from "next/link";
 import StepsHandlerBtns from "../../StepsHandlerBtns";
 import Product from "./_components/Product";
+import styles from "./styles.module.css";
 
 export default function ThirdStep({ setCurrentStep, currentStep, petData }) {
   return (
@@ -38,10 +40,26 @@ export default function ThirdStep({ setCurrentStep, currentStep, petData }) {
           petData={petData}
         ></Product>
       </div>
-      <StepsHandlerBtns
-        setCurrentStep={setCurrentStep}
-        currentStep={currentStep}
-      />
+      <div style={{ marginTop: "10px" }}>
+        <Link href={"http://localhost:3000?shopRef=rNGfsGUXaJ5gqctXyDX5VB"}>
+          <p
+            style={{
+              background: "var(--main-color)",
+              border: "none",
+              outline: "none",
+              padding: "10px",
+              borderRadius: "4px",
+              color: "#fff",
+              display: "flex",
+              justifyContent: "center",
+              fontSize: "12px",
+            }}
+          >
+            Volver a la pagina principal
+          </p>
+        </Link>
+        <div className={styles.verticalSeparator}></div>
+      </div>
     </>
   );
 }

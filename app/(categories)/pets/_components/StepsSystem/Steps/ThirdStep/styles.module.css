@@ -1,0 +1,9 @@
+.verticalSeparator {
+  height: 0px;
+}
+
+@media screen and (max-height: 810px) {
+  .verticalSeparator {
+    height: 200px;
+  }
+}

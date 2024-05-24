@@ -4,7 +4,7 @@ import FieldDescription from "@/app/(categories)/_components/FieldDescription";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function CustomerOrder({ setCurrentStep }) {
+export default function CustomerOrder({ mode }) {
   const [showOrderModal, setShowOrderModal] = useState(false);
 
   return (
@@ -152,39 +152,69 @@ export default function CustomerOrder({ setCurrentStep }) {
           </div>
         </div>
       )}
+
+      {/*
+      {mode === 1 && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: "0px",
+            left: "0px",
+            right: "0px",
+            background: "#8c52ff",
+            color: "#fff",
+            width: "100%",
+            margin: "0", // Ensure no margin
+            padding: "10px", // Adjust padding as needed
+          }}
+        >
+          <button
+            onClick={() => setShowOrderModal(true)}
+            style={{
+              width: "100%", // Make the button span the entire width of the parent div
+              background: "#fff", // Make button background transparent to match parent
+              border: "none", // Remove button border
+              color: "var(--main-color)", // Inherit text color from parent
+              fontSize: "inherit", // Inherit font size from parent
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src={"/icons/modals-and-messages/shop-cart.svg"}
+              width={35}
+              height={35}
+            ></Image>
+            <span>Mira tu orden aquí</span>
+          </button>
+        </div>
+      )}
+       */}
+
       <div
         style={{
           position: "fixed",
           bottom: "0px",
-          left: "0px",
           right: "0px",
           background: "#8c52ff",
           color: "#fff",
-          width: "100%",
-          margin: "0", // Ensure no margin
-          padding: "10px", // Adjust padding as needed
+          margin: "10px",
+          borderRadius: "50%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
+        onClick={() => setShowOrderModal(true)}
       >
-        <button
-          onClick={() => setShowOrderModal(true)}
-          style={{
-            width: "100%", // Make the button span the entire width of the parent div
-            background: "#fff", // Make button background transparent to match parent
-            border: "none", // Remove button border
-            color: "var(--main-color)", // Inherit text color from parent
-            fontSize: "inherit", // Inherit font size from parent
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div style={{ display: "flex" }}>
           <Image
-            src={"/icons/modals-and-messages/shop-cart.svg"}
-            width={35}
-            height={35}
+            src={"/icons/modals-and-messages/shop-cart-white.svg"}
+            width={70}
+            height={70}
+            style={{ margin: "auto 0px" }}
           ></Image>
-          <span>Mira tu orden aquí</span>
-        </button>
+        </div>
       </div>
     </>
   );

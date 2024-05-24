@@ -16,10 +16,6 @@ export default function Page() {
     petType: "Perro",
   });
 
-  useEffect(() => {
-    console.log(currentStep);
-  }, [currentStep]);
-
   // Define the steps mapping
   const steps = {
     1: (
@@ -64,7 +60,9 @@ export default function Page() {
         <div style={{ marginTop: "30px" }}>{steps[currentStep]}</div>
       </div>
 
-      {currentStep === 3 && <CustomerOrder setCurrentStep={setCurrentStep} />}
+      {currentStep === 3 && (
+        <CustomerOrder setCurrentStep={setCurrentStep} mode={1} />
+      )}
       <div className={styles.verticalSeparator}></div>
     </div>
   );
