@@ -3,7 +3,7 @@ import StepsHandlerBtns from "../../StepsHandlerBtns";
 import Product from "./_components/Product";
 import styles from "./styles.module.css";
 
-export default function ThirdStep({ setCurrentStep, currentStep, petData }) {
+export default function ThirdStep({ petData, setOrderData, orderData }) {
   return (
     <>
       <div
@@ -26,6 +26,8 @@ export default function ThirdStep({ setCurrentStep, currentStep, petData }) {
           productName={"Taza de cerámica 325 ml"}
           productPrice={"15.500 COP"}
           petData={petData}
+          setOrderData={setOrderData}
+          orderData={orderData}
         ></Product>
 
         <Product
@@ -38,6 +40,8 @@ export default function ThirdStep({ setCurrentStep, currentStep, petData }) {
           productName={"Taza de cerámica mágica 325 ml"}
           productPrice={"19.500 COP"}
           petData={petData}
+          setOrderData={setOrderData}
+          orderData={orderData}
         ></Product>
       </div>
       <div style={{ marginTop: "10px" }}>

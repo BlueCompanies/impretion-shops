@@ -2,16 +2,45 @@ import FieldDescription from "@/app/(categories)/_components/FieldDescription";
 import dogDesigns from "@/app/_lib/designs/dogDesigns.json";
 import Image from "next/image";
 import ProductViewFullScreen from "../ProductViewFullScreen";
+import awsS3 from "@/app/_lib/aws/awsS3";
+import ShortUniqueId from "short-unique-id";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 
 export default function CustomizeWindow({
   isCustomizing,
-  newImageUrl,
+  blobImage,
+  blobImageUrl,
   closeCustomizeWindow,
   assignDesingToProductHandler,
   productName,
   loadingDesign,
   designId,
+  setOrderData,
+  orderData,
 }) {
+  const newProductHandler = async () => {
+    //const arrayBuffer = await newImageUrl.arrayBuffer();
+    const uid = new ShortUniqueId({ length: 10 });
+    const generatedId = uid.rnd();
+
+    // NOTE: you will need to wrap this up in a async block first.
+    /* Use the await keyword to wait for the Promise to resolve */
+    const arrayBuffer = await new Response(blobImage).arrayBuffer();
+    console.log(arrayBuffer);
+
+    // Create the PutObjectCommand
+    let command = new PutObjectCommand({
+      Bucket: "impretion",
+      Key: `test-images/image-orders/${generatedId}.png`,
+      Body: arrayBuffer,
+    });
+
+    // Upload the image to S3
+    await awsS3().send(command);
+
+    setOrderData([...orderData, {}]);
+  };
+
   return (
     <>
       {isCustomizing && (
@@ -37,7 +66,10 @@ export default function CustomizeWindow({
           >
             {productName}
           </p>
-          <div style={{ display: "flex", padding: "10px" }}>
+          <div
+            style={{ display: "flex", padding: "10px" }}
+            onClick={newProductHandler}
+          >
             <div
               style={{
                 minWidth: "30px",
@@ -85,7 +117,7 @@ export default function CustomizeWindow({
               position: "relative",
             }}
           >
-            <ProductViewFullScreen newImageUrl={newImageUrl} />
+            <ProductViewFullScreen blobImageUrl={blobImageUrl} />
             <div style={{ width: "250px", height: "250px" }}>
               {loadingDesign && (
                 <div
@@ -110,7 +142,6 @@ export default function CustomizeWindow({
                       alignItems: "center",
                     }}
                   >
-                    <img src="/loading/loader.svg"></img>
                     <p style={{ fontSize: "11px", color: "#dedede" }}>
                       Cargando tu diseño...
                     </p>
@@ -119,7 +150,7 @@ export default function CustomizeWindow({
               )}
               <Image
                 src={
-                  newImageUrl ||
+                  blobImageUrl ||
                   "https://xyzstorage.store/impretion-shops%2Fproducts-placeholder%2Fmug-placeholder.png"
                 }
                 width={250}

@@ -9,6 +9,8 @@ export default function Product({
   productName,
   productPrice,
   petData,
+  setOrderData,
+  orderData,
 }) {
   return (
     <>
@@ -54,6 +56,8 @@ export default function Product({
             productImageUrl={productImageUrl}
             productName={productName}
             petData={petData}
+            setOrderData={setOrderData}
+            orderData={orderData}
           />
         </div>
       </div>

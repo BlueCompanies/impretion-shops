@@ -15,6 +15,7 @@ export default function Page() {
     petName: "",
     petType: "Perro",
   });
+  const [orderData, setOrderData] = useState([]);
 
   // Define the steps mapping
   const steps = {
@@ -36,9 +37,9 @@ export default function Page() {
     ),
     3: (
       <ThirdStep
-        setCurrentStep={setCurrentStep}
-        currentStep={currentStep}
         petData={petData}
+        setOrderData={setOrderData}
+        orderData={orderData}
       />
     ),
   };
@@ -60,9 +61,7 @@ export default function Page() {
         <div style={{ marginTop: "30px" }}>{steps[currentStep]}</div>
       </div>
 
-      {currentStep === 3 && (
-        <CustomerOrder setCurrentStep={setCurrentStep} mode={1} />
-      )}
+      {currentStep === 3 && <CustomerOrder setCurrentStep={setCurrentStep} />}
       <div className={styles.verticalSeparator}></div>
     </div>
   );

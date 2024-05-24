@@ -1,0 +1,41 @@
+@keyframes LdioAnimation {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.Ldio div {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border: 10px solid rgba(179, 179, 179, 0.498);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: LdioAnimation 1s linear infinite;
+  top: 100px;
+  left: 100px;
+}
+
+.LoadingioSpinnerRolling {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  overflow: hidden;
+  background: none;
+}
+
+.Ldio {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+.Ldio div {
+  box-sizing: content-box;
+}

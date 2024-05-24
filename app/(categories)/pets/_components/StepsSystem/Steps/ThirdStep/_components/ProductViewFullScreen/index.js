@@ -3,9 +3,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function ProductViewFullScreen({ newImageUrl }) {
+export default function ProductViewFullScreen({ blobImageUrl }) {
   const [showModalWindow, setShowModalWindow] = useState(false);
-  console.log(newImageUrl);
+
   useEffect(() => {
     // Disable scrolling
     document.body.style.overflow = "hidden";
@@ -58,15 +58,18 @@ export default function ProductViewFullScreen({ newImageUrl }) {
               justifyContent: "center",
               alignItems: "center",
               height: "100%",
+              minWidth: "100%",
+              width: "100%",
             }}
           >
             <img
               src={
-                newImageUrl ||
+                blobImageUrl ||
                 "https://xyzstorage.store/impretion-shops%2Fproducts-placeholder%2Fmug-placeholder.png"
               }
               width={450}
               height={450}
+              alt="Full screen image"
             ></img>
           </div>
         </div>

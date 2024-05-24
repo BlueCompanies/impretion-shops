@@ -8,11 +8,14 @@ export default function SelectedProduct({
   productURL,
   productName,
   petData,
+  setOrderData,
+  orderData,
 }) {
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [photopeaString, setPhotopeaString] = useState("");
   const [designId, setDesignId] = useState(0); // Key to force iframe re-render
-  const [newImageUrl, setNewImageUrl] = useState("");
+  const [blobImage, setBlobImage] = useState("");
+  const [blobImageUrl, setBlobImageUrl] = useState("");
   const [loadingDesign, setLoadingDesign] = useState(false);
 
   async function handleMessage(event) {
@@ -24,11 +27,8 @@ export default function SelectedProduct({
           : new Blob([event.data], { type: "image/png" });
 
       // Create an object URL for the blob and set it as the new image URL
-      const newImageUrl = URL.createObjectURL(blob);
-      setNewImageUrl(newImageUrl);
-
-      const formData = new FormData();
-      formData.append("image", blob, "image.png");
+      setBlobImageUrl(URL.createObjectURL(blob));
+      setBlobImage(blob);
     }
   }
 
@@ -92,12 +92,15 @@ export default function SelectedProduct({
       <CustomizeWindow
         isCustomizing={isCustomizing}
         selectedProduct={selectedProduct}
-        newImageUrl={newImageUrl}
+        blobImage={blobImage}
+        blobImageUrl={blobImageUrl}
         assignDesingToProductHandler={assignDesingToProductHandler}
         closeCustomizeWindow={closeCustomizeWindow}
         productName={productName}
         loadingDesign={loadingDesign}
         designId={designId}
+        setOrderData={setOrderData}
+        orderData={orderData}
       />
 
       <div style={{ display: "flex", width: "100%" }}>
