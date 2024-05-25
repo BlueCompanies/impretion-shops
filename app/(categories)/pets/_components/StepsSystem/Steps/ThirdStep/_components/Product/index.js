@@ -11,6 +11,11 @@ export default function Product({
   petData,
   setOrderData,
   orderData,
+  script,
+  setExtraParam,
+  extraParam,
+  productUIType,
+  productImagePlaceholder,
 }) {
   return (
     <>
@@ -48,6 +53,7 @@ export default function Product({
           }}
         >
           <p style={{ fontSize: "13px" }}>{productName}</p>
+
           <p style={{ margin: "5px" }}>{productPrice}</p>
           <SelectedProduct
             selectedProduct={selectedProduct}
@@ -58,6 +64,11 @@ export default function Product({
             petData={petData}
             setOrderData={setOrderData}
             orderData={orderData}
+            script={script}
+            setExtraParam={setExtraParam}
+            extraParam={extraParam}
+            productUIType={productUIType}
+            productImagePlaceholder={productImagePlaceholder}
           />
         </div>
       </div>

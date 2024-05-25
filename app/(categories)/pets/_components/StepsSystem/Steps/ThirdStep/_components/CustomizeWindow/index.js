@@ -5,9 +5,11 @@ import ProductViewFullScreen from "../ProductViewFullScreen";
 import awsS3 from "@/app/_lib/aws/awsS3";
 import ShortUniqueId from "short-unique-id";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
+import ProductExtraFunctionalities from "@/app/(categories)/_components/ProductExtraFunctionalities";
 
 export default function CustomizeWindow({
   isCustomizing,
+  selectedProduct,
   blobImage,
   blobImageUrl,
   closeCustomizeWindow,
@@ -17,6 +19,10 @@ export default function CustomizeWindow({
   designId,
   setOrderData,
   orderData,
+  extraParam,
+  setExtraParam,
+  productUIType,
+  productImagePlaceholder,
 }) {
   const newProductHandler = async () => {
     //const arrayBuffer = await newImageUrl.arrayBuffer();
@@ -149,15 +155,18 @@ export default function CustomizeWindow({
                 </div>
               )}
               <Image
-                src={
-                  blobImageUrl ||
-                  "https://xyzstorage.store/impretion-shops%2Fproducts-placeholder%2Fmug-placeholder.png"
-                }
+                src={blobImageUrl || productImagePlaceholder}
                 width={250}
                 height={250}
               ></Image>
             </div>
           </div>
+          <ProductExtraFunctionalities
+            productUIType={productUIType}
+            setExtraParam={setExtraParam}
+            extraParam={extraParam}
+            blobImageUrl={blobImageUrl}
+          />
 
           <div
             style={{

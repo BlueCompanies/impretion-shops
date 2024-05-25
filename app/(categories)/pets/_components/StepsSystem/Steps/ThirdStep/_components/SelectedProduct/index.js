@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CustomizeWindow from "../CustomizeWindow";
 
 export default function SelectedProduct({
@@ -10,6 +10,10 @@ export default function SelectedProduct({
   petData,
   setOrderData,
   orderData,
+  productUIType,
+  productImagePlaceholder,
+  setExtraParam,
+  extraParam,
 }) {
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [photopeaString, setPhotopeaString] = useState("");
@@ -17,6 +21,19 @@ export default function SelectedProduct({
   const [blobImage, setBlobImage] = useState("");
   const [blobImageUrl, setBlobImageUrl] = useState("");
   const [loadingDesign, setLoadingDesign] = useState(false);
+  const photopeaRef = useRef(null);
+
+  useEffect(() => {
+    if (!photopeaRef.current) return;
+    console.log(extraParam);
+    const wnd = photopeaRef.current.contentWindow;
+    wnd.postMessage(
+      "function changeSolidColorLayer() { var sColor = new SolidColor(); sColor.rgb.hexValue = '" +
+        extraParam +
+        "'; changeSolidFillColor('color', sColor); function changeSolidFillColor(layerName, sColor) { var doc = app.activeDocument; var layerFound = false; for (var j = 0; j < doc.artLayers.length; j++) { var layer = doc.artLayers[j]; if (layer.kind === LayerKind.SOLIDFILL && layer.name === layerName) { setColorOfFillLayer(layer, sColor); alert('Color changed successfully!'); layerFound = true; break; } } if (!layerFound) { alert('Layer ' + layerName + ' not found.'); } } function setColorOfFillLayer(layer, sColor) { app.activeDocument.activeLayer = layer; var desc = new ActionDescriptor(); var ref = new ActionReference(); ref.putEnumerated(stringIDToTypeID('contentLayer'), charIDToTypeID('Ordn'), charIDToTypeID('Trgt')); desc.putReference(charIDToTypeID('null'), ref); var fillDesc = new ActionDescriptor(); var colorDesc = new ActionDescriptor(); colorDesc.putDouble(charIDToTypeID('Rd  '), sColor.rgb.red); colorDesc.putDouble(charIDToTypeID('Grn '), sColor.rgb.green); colorDesc.putDouble(charIDToTypeID('Bl  '), sColor.rgb.blue); fillDesc.putObject(charIDToTypeID('Clr '), charIDToTypeID('RGBC'), colorDesc); desc.putObject(charIDToTypeID('T   '), stringIDToTypeID('solidColorLayer'), fillDesc); executeAction(charIDToTypeID('setd'), desc, DialogModes.NO); doc.saveToOE('png'); } } changeSolidColorLayer();",
+      "*"
+    );
+  }, [extraParam]);
 
   async function handleMessage(event) {
     if (event.data === "processed") setLoadingDesign(false);
@@ -47,6 +64,10 @@ export default function SelectedProduct({
   };
 
   useEffect(() => {
+    console.log(
+      "vida hp: ",
+      `https://xyzstorage.store/impretion-shops/psd-designs/${productURL}/${designId}.psd`
+    );
     const petName =
       petData.petName.length > 0 ? petData.petName : "Nombre mascota";
     const config = {
@@ -70,6 +91,13 @@ export default function SelectedProduct({
     setIsCustomizing(false);
   };
 
+  const openCustomizeWindow = () => {
+    setIsCustomizing(true);
+    setBlobImage("");
+    setBlobImageUrl("");
+    setDesignId("");
+  };
+
   useEffect(() => {
     console.log("Loading design status:", loadingDesign);
   }, [loadingDesign]);
@@ -86,6 +114,7 @@ export default function SelectedProduct({
             height: "100%",
             display: "none",
           }}
+          ref={photopeaRef}
         ></iframe>
       )}
 
@@ -94,6 +123,8 @@ export default function SelectedProduct({
         selectedProduct={selectedProduct}
         blobImage={blobImage}
         blobImageUrl={blobImageUrl}
+        setBlobImageUrl={setBlobImageUrl}
+        setBlobImage={setBlobImage}
         assignDesingToProductHandler={assignDesingToProductHandler}
         closeCustomizeWindow={closeCustomizeWindow}
         productName={productName}
@@ -101,6 +132,10 @@ export default function SelectedProduct({
         designId={designId}
         setOrderData={setOrderData}
         orderData={orderData}
+        productUIType={productUIType}
+        productImagePlaceholder={productImagePlaceholder}
+        setExtraParam={setExtraParam}
+        extraParam={extraParam}
       />
 
       <div style={{ display: "flex", width: "100%" }}>
@@ -115,7 +150,7 @@ export default function SelectedProduct({
             background: "#8c52ff",
             color: "#fff",
           }}
-          onClick={() => setIsCustomizing(true)}
+          onClick={() => openCustomizeWindow()}
         >
           PERSONALIZAR
         </button>

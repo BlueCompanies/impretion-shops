@@ -131,6 +131,7 @@ export default function ImageUploader({ setPetData, petData }) {
             src={petData.image}
             alt="Pet"
             style={{ margin: "10px", borderRadius: "4px", objectFit: "cover" }}
+            quality={20}
           />
         ) : (
           <Image

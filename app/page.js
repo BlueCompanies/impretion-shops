@@ -134,7 +134,7 @@ export default async function PrincipalPage({ searchParams }) {
           </div>
         </div>
 
-        <CustomerOrder mode={2} />
+        <CustomerOrder />
       </main>
     );
   } else {

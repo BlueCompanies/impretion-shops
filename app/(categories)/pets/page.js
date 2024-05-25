@@ -17,6 +17,9 @@ export default function Page() {
   });
   const [orderData, setOrderData] = useState([]);
 
+  // allows to change some functionalities in the special scripts
+  const [extraParam, setExtraParam] = useState();
+
   // Define the steps mapping
   const steps = {
     1: (
@@ -40,6 +43,8 @@ export default function Page() {
         petData={petData}
         setOrderData={setOrderData}
         orderData={orderData}
+        setExtraParam={setExtraParam}
+        extraParam={extraParam}
       />
     ),
   };
@@ -61,7 +66,7 @@ export default function Page() {
         <div style={{ marginTop: "30px" }}>{steps[currentStep]}</div>
       </div>
 
-      {currentStep === 3 && <CustomerOrder setCurrentStep={setCurrentStep} />}
+      {currentStep === 3 && <CustomerOrder />}
       <div className={styles.verticalSeparator}></div>
     </div>
   );

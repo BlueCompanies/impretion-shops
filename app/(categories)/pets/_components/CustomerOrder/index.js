@@ -4,7 +4,7 @@ import FieldDescription from "@/app/(categories)/_components/FieldDescription";
 import Image from "next/image";
 import { useState } from "react";
 
-export default function CustomerOrder({ mode }) {
+export default function CustomerOrder({}) {
   const [showOrderModal, setShowOrderModal] = useState(false);
 
   return (

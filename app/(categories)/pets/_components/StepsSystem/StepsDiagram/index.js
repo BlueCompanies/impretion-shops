@@ -73,14 +73,19 @@ export default function StepsDiagram({ currentStep, petData, setPetData }) {
             <p className={styles.stepText} style={{ fontWeight: 700 }}>
               Foto de tu mascota
             </p>
-            <div className={styles.stepText}>
+            <div>
               {petData.image && (
                 <Image
                   src={petData.image}
-                  style={{ width: "40px", height: "40px" }}
+                  style={{
+                    objectFit: "cover",
+                    width: "40px",
+                    height: "40px",
+                    borderRadius: "4px",
+                  }}
                   width={40}
                   height={40}
-                  quality={60}
+                  quality={20}
                   className={styles.stepText}
                 ></Image>
               )}
@@ -91,6 +96,7 @@ export default function StepsDiagram({ currentStep, petData, setPetData }) {
                     textDecoration: "underline",
                     fontSize: "12px",
                   }}
+                  className={styles.stepText}
                 >
                   Agrega una imagen
                 </span>
