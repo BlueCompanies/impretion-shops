@@ -1,5 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import SessionHandler from "./(categories)/_components/SessionHandler";
+import CustomerOrder from "./(categories)/_components/CustomerOrder";
+import { getCookie, getCookies } from "cookies-next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,7 +14,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <SessionHandler />
+        <CustomerOrder />
+        {children}
+      </body>
     </html>
   );
 }

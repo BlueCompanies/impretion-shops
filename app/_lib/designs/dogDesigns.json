@@ -1,40 +1,38 @@
-{
-  "dogDesigns": [
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F1-min.webp",
-      "designId": "Z2pyAFA"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F2-min.webp",
-      "designId": "D3e4FT"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F3-min.webp",
-      "designId": "G5h6It"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F4-min.webp",
-      "designId": "Tyu4Snza"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F5-min.webp",
-      "designId": "P1q2Rzr"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F6-min.webp",
-      "designId": "A1b2C"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F8-min.webp",
-      "designId": "O5p6Q"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F9-min.webp",
-      "designId": "R7s8Tz"
-    },
-    {
-      "designUrl": "https://xyzstorage.store/impretion-shops%2Fdog-designs%2F11-min.webp",
-      "designId": "Gh43SzTyx"
-    }
-  ]
-}
+[
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/1.webp",
+    "designId": "Z2pyAFA"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/2.webp",
+    "designId": "D3e4FT"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/3.webp",
+    "designId": "G5h6It"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/4.webp",
+    "designId": "Tyu4Snza"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops%2Fraw-designs%2Fpets%2Fdog-designs%2F5.webp",
+    "designId": "P1q2Rzr"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/6.webp",
+    "designId": "A1b2C"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/8.webp",
+    "designId": "O5p6Q"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/9.webp",
+    "designId": "R7s8Tz"
+  },
+  {
+    "designUrl": "https://xyzstorage.store/impretion-shops/raw-designs/pets/dog-designs/11.webp",
+    "designId": "Gh43SzTyx"
+  }
+]

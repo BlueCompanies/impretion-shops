@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SelectedProduct from "@/app/(categories)/pets/_components/StepsSystem/Steps/ThirdStep/_components/SelectedProduct";
+import SelectedProduct from "../SelectedProduct";
 
 export default function Product({
   productData,
@@ -8,6 +8,7 @@ export default function Product({
   extraParam,
   productUIType,
 }) {
+  console.log(data);
   return (
     <>
       <div

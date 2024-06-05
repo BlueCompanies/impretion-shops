@@ -1,10 +1,42 @@
 import Link from "next/link";
-import Product from "./_components/Product";
 import styles from "./styles.module.css";
+import Product from "./_components/Product";
 
-export default function ThirdStep({ petData, extraParam, setExtraParam }) {
+export default function SecondStep({ data }) {
   return (
-    <>
+    <div style={{ border: "1px solid #dedede", padding: "10px" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          marginBottom: "10px",
+        }}
+      >
+        <div
+          style={{
+            minWidth: "50px",
+            minHeight: "50px",
+            borderRadius: "50%",
+            background: "#5271FF",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontWeight: 700,
+            fontSize: "26px",
+            color: "#fff",
+          }}
+        >
+          2
+        </div>
+        <div style={{ marginLeft: "10px" }}>
+          <p style={{ fontWeight: 700 }}>PASO 2: PERSONALIZACIÓN</p>
+          <p style={{ fontSize: "12px" }}>
+            Comencemos por agregar el nombre y una frase memorable para esa
+            persona especial. Podras ver esto reflejado en el producto que
+            elijas.
+          </p>
+        </div>
+      </div>
       <div
         style={{
           background: "#fff",
@@ -14,7 +46,6 @@ export default function ThirdStep({ petData, extraParam, setExtraParam }) {
           backgroundColor: "#dedede",
         }}
       >
-        {/* UIType prop allows to show determinated UI depending on the product => 1 (none) | 2 (color changer) | 3 ¿? */}
         <Product
           productData={{
             productRawName: "mug",
@@ -25,10 +56,8 @@ export default function ThirdStep({ petData, extraParam, setExtraParam }) {
             productImagePlaceholder:
               "https://xyzstorage.store/products%2Fmugs%2F64ef87cba6fe6b117e7aaab6%2Fpreviews%2Fimpretion-shops_products-placeholder_mug-placeholder.webp",
           }}
-          data={petData}
-          setExtraParam={setExtraParam}
-          extraParam={extraParam}
           productUIType={1}
+          data={data}
         ></Product>
 
         <Product
@@ -41,9 +70,6 @@ export default function ThirdStep({ petData, extraParam, setExtraParam }) {
             productImagePlaceholder:
               "https://xyzstorage.store/products%2Fmugs%2F66512ac2258a35db2bf5788f%2Fimages%2Fcolored-mug-placeholder%20.webp",
           }}
-          data={petData}
-          setExtraParam={setExtraParam}
-          extraParam={extraParam}
           productUIType={2}
         ></Product>
 
@@ -57,10 +83,8 @@ export default function ThirdStep({ petData, extraParam, setExtraParam }) {
             productImagePlaceholder:
               "https://xyzstorage.store/products%2Fmugs%2F652e32dfbcfee2bb108da386%2Fpreviews%2Fmagicmug-placeholder.webp",
           }}
-          data={petData}
-          setExtraParam={setExtraParam}
-          extraParam={extraParam}
           productUIType={1}
+          data={data}
         ></Product>
       </div>
       <div style={{ marginTop: "10px" }}>
@@ -83,6 +107,6 @@ export default function ThirdStep({ petData, extraParam, setExtraParam }) {
         </Link>
         <div className={styles.verticalSeparator}></div>
       </div>
-    </>
+    </div>
   );
 }

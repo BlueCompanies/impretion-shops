@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { getShopData } from "./_lib/shopDataFetch/getShopData";
 import Link from "next/link";
-import CustomerOrder from "./(categories)/pets/_components/CustomerOrder";
+import CustomerOrder from "./(categories)/_components/CustomerOrder";
 
 export const runtime = "edge";
 
@@ -123,7 +123,7 @@ export default async function PrincipalPage({ searchParams }) {
             >
               <Link
                 href={{
-                  pathname: "/products",
+                  pathname: "/general",
                   query: { shopRef },
                 }}
                 style={{ width: "100%" }}
@@ -133,8 +133,6 @@ export default async function PrincipalPage({ searchParams }) {
             </div>
           </div>
         </div>
-
-        <CustomerOrder />
       </main>
     );
   } else {

@@ -5,7 +5,7 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import Image from "next/image";
 import ShortUniqueId from "short-unique-id";
 
-export default function ImageUploader({ setPetData, petData }) {
+export default function ImageUploader({ setUserData, userData }) {
   const imageSelector = useRef(null);
 
   const imageUploaderHandler = () => {
@@ -36,7 +36,7 @@ export default function ImageUploader({ setPetData, petData }) {
 
           const generatedUrl = `https://xyzstorage.store/test-images/${generatedId}.png`;
           // Create a URL for the image to display in the img tag
-          setPetData({ ...petData, image: generatedUrl });
+          setUserData({ ...userData, image: generatedUrl });
         } catch (error) {
           console.error("S3 upload error: ", error);
         }
@@ -44,10 +44,6 @@ export default function ImageUploader({ setPetData, petData }) {
       reader.readAsArrayBuffer(file);
     }
   };
-
-  useEffect(() => {
-    console.log("petData: ", petData);
-  }, [petData]);
 
   return (
     <>
@@ -65,7 +61,7 @@ export default function ImageUploader({ setPetData, petData }) {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: "#E7DAFF",
+          background: "#BCC8FF",
           marginBottom: "10px",
           width: "100%",
         }}
@@ -89,7 +85,7 @@ export default function ImageUploader({ setPetData, petData }) {
               textAlign: "center",
             }}
           >
-            {petData.image ? (
+            {userData.image ? (
               <div
                 style={{
                   display: "flex",
@@ -113,7 +109,7 @@ export default function ImageUploader({ setPetData, petData }) {
                   alignItems: "center",
                 }}
               >
-                <span>Agrega una imagen de tu mascota</span>
+                <span>Agrega una imagen</span>
                 <Image
                   src="/icons/modals-and-messages/camera.webp"
                   width={40}
@@ -124,11 +120,11 @@ export default function ImageUploader({ setPetData, petData }) {
             )}
           </div>
         </div>
-        {petData.image ? (
+        {userData.image ? (
           <Image
             width={150}
             height={150}
-            src={petData.image}
+            src={userData.image}
             alt="Pet"
             style={{ margin: "10px", borderRadius: "4px", objectFit: "cover" }}
             quality={20}
@@ -137,7 +133,7 @@ export default function ImageUploader({ setPetData, petData }) {
           <Image
             width={150}
             height={150}
-            src="/images/placeholder-images/pets-image-upload-placeholder.webp"
+            src="/images/placeholder-images/general-image-upload-placeholder.webp"
             alt="Placeholder"
             style={{ margin: "10px" }}
           />

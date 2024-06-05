@@ -1,6 +1,5 @@
 import FieldDescription from "@/app/(categories)/_components/FieldDescription";
-import dogDesigns from "@/app/_lib/designs/dogDesigns.json";
-import catDesigns from "@/app/_lib/designs/catDesigns.json";
+import fathersDesigns from "@/app/_lib/designs/fathersDesigns.json";
 import Image from "next/image";
 import ProductViewFullScreen from "@/app/(categories)/pets/_components/StepsSystem/Steps/ThirdStep/_components/ProductViewFullScreen";
 import ProductExtraFunctionalities from "@/app/(categories)/_components/ProductExtraFunctionalities";
@@ -20,8 +19,6 @@ export default function CustomizeWindow({
   productUIType,
   data,
 }) {
-  const petType = data.petType === "Perro" ? dogDesigns : catDesigns;
-
   return (
     <>
       {isCustomizing && (
@@ -140,7 +137,7 @@ export default function CustomizeWindow({
             </div>
             <div style={{ width: "100%" }}>
               <div style={{ position: "relative" }}>
-                {petType.map((design, index) => (
+                {fathersDesigns.map((design, index) => (
                   <img
                     src={design.designUrl}
                     onClick={() =>

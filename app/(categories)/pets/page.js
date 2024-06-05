@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FirstStep from "./_components/StepsSystem/Steps/FirstStep";
 import StepsDiagram from "./_components/StepsSystem/StepsDiagram";
 import SecondStep from "./_components/StepsSystem/Steps/SecondStep";
 import ThirdStep from "./_components/StepsSystem/Steps/ThirdStep";
-import CustomerOrder from "./_components/CustomerOrder";
+import CustomerOrder from "../_components/CustomerOrder";
 import styles from "./styles.module.css";
 
 export default function Page() {
@@ -15,7 +15,6 @@ export default function Page() {
     petName: "",
     petType: "Perro",
   });
-  const [orderData, setOrderData] = useState([]);
 
   // allows to change some functionalities in the special scripts
   const [extraParam, setExtraParam] = useState();
@@ -41,8 +40,6 @@ export default function Page() {
     3: (
       <ThirdStep
         petData={petData}
-        setOrderData={setOrderData}
-        orderData={orderData}
         setExtraParam={setExtraParam}
         extraParam={extraParam}
       />
@@ -66,7 +63,6 @@ export default function Page() {
         <div style={{ marginTop: "30px" }}>{steps[currentStep]}</div>
       </div>
 
-      {currentStep === 3 && <CustomerOrder />}
       <div className={styles.verticalSeparator}></div>
     </div>
   );
