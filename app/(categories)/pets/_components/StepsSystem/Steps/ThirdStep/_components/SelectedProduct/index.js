@@ -20,7 +20,6 @@ export default function SelectedProduct({
 
   useEffect(() => {
     if (!photopeaRef.current) return;
-    console.log(extraParam);
     const wnd = photopeaRef.current.contentWindow;
     wnd.postMessage(
       "function changeSolidColorLayer() { var sColor = new SolidColor(); sColor.rgb.hexValue = '" +
@@ -38,7 +37,6 @@ export default function SelectedProduct({
           ? event.data
           : new Blob([event.data], { type: "image/png" });
 
-      console.log(blob);
       // Create an object URL for the blob and set it as the new image URL
       setBlobImageUrl(URL.createObjectURL(blob));
       setBlobImage(blob);
@@ -63,11 +61,7 @@ export default function SelectedProduct({
     const petName = data.petName.length > 0 ? data.petName : "Nombre mascota";
 
     const animalType = data.petType === "Perro" ? "dog-designs" : "cat-designs";
-    console.log("kekw: ", animalType);
-    console.log(
-      "alana: ",
-      `https://xyzstorage.store/impretion-shops/psd-designs/${animalType}/${productData?.productRawName}/${designId}.psd`
-    );
+
     const config = {
       files: [
         data.image ||
@@ -95,10 +89,6 @@ export default function SelectedProduct({
     setBlobImageUrl("");
     setDesignId("");
   };
-
-  useEffect(() => {
-    console.log("Loading design status:", loadingDesign);
-  }, [loadingDesign]);
 
   return (
     <>

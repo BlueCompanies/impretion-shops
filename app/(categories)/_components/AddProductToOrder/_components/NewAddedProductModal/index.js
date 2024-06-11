@@ -75,7 +75,7 @@ export default function NewAddedProductModal({
                   <div style={{ width: "90%", marginTop: "10px" }}>
                     <FieldDescription>
                       Puedes ver tu carrito de compras en la esquina inferior
-                      derecha al dar click en "volver".
+                      derecha al dar click en &quot;volver&quot;.
                     </FieldDescription>
                   </div>
                   <p style={{ fontSize: "11px" }}>

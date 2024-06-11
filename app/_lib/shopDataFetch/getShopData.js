@@ -1,5 +1,4 @@
 export const getShopData = async (shopRef) => {
-  console.log(shopRef);
   try {
     const response = await fetch(
       `https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/findOne?ms=${new Date().getTime()}`,

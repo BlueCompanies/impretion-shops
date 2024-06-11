@@ -52,7 +52,7 @@ export default function AddProductToOrder({ productData, data, blobImage }) {
         clientSession,
         generatedId,
         data: {
-          data,
+          productUserData: data,
           productRawName: productData?.productRawName,
           productFullName: productData?.productFullName,
           productPrice: productData?.productPrice,

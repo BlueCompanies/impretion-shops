@@ -45,10 +45,6 @@ export default function ImageUploader({ setPetData, petData }) {
     }
   };
 
-  useEffect(() => {
-    console.log("petData: ", petData);
-  }, [petData]);
-
   return (
     <>
       <input

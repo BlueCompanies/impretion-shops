@@ -10,7 +10,6 @@ export const runtime = "edge";
 export async function POST(req, res) {
   try {
     const body = await req.json();
-    //console.log(body);
     const { userData, userContactNumber } = body;
     const { sessionId } = userData;
     const BUCKET_PREFIX = `impretion-shops/user-temp-sessions-files/${sessionId}/orders`;
@@ -48,6 +47,9 @@ export async function POST(req, res) {
     await insertOne("orders", {
       userData,
       userContactNumber,
+      orderStatus: {
+        orderProcessed: false,
+      },
     });
 
     return NextResponse.json({}, { status: 200 });

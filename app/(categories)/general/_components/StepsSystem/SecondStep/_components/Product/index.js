@@ -8,7 +8,6 @@ export default function Product({
   extraParam,
   productUIType,
 }) {
-  console.log(data);
   return (
     <>
       <div

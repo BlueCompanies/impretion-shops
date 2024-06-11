@@ -8,7 +8,6 @@ export default function ColorsPalette({
   blobImageUrl,
 }) {
   const colorChangeHandler = (hexColor) => {
-    console.log(blobImageUrl);
     setExtraParam(hexColor);
   };
 

@@ -23,7 +23,6 @@ export default async function updateOne(filter, update) {
     );
 
     const data = await response.json();
-    console.log(data);
     const { document } = data;
     return document;
   } catch (error) {

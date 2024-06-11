@@ -7,7 +7,6 @@ export const runtime = "edge";
 export async function POST(req, res) {
   try {
     const body = await req.json();
-    console.log(body);
 
     return NextResponse.json({}, { status: 200 });
   } catch (error) {

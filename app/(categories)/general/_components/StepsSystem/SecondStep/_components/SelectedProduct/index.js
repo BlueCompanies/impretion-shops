@@ -20,7 +20,6 @@ export default function SelectedProduct({
 
   useEffect(() => {
     if (!photopeaRef.current) return;
-    console.log(extraParam);
     const wnd = photopeaRef.current.contentWindow;
     wnd.postMessage(
       "function changeSolidColorLayer() { var sColor = new SolidColor(); sColor.rgb.hexValue = '" +
@@ -65,10 +64,7 @@ export default function SelectedProduct({
 
   useEffect(() => {
     const name = data?.name?.length > 0 ? data?.name : "Nombre";
-    console.log(
-      productData?.productRawName,
-      `https://xyzstorage.store/impretion-shops/psd-designs/fathers-day-designs/${productData?.productRawName}/no-design.psd`
-    );
+
     const config = {
       files: [
         data?.image ||

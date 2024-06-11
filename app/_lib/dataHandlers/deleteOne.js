@@ -22,7 +22,6 @@ export default async function deleteOne(collection, filter) {
 
     const data = await response.json();
     const { document } = data;
-    console.log(document);
     return document;
   } catch (error) {
     console.log(error);

@@ -27,7 +27,6 @@ export default function OrderModalWindow({ clientSession }) {
         body: JSON.stringify({ clientSession }),
       }).then(async (res) => {
         const data = await res.json();
-        console.log("ptm: ", data);
         setUserData(data);
       });
     }
