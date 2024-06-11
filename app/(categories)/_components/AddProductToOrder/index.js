@@ -14,14 +14,13 @@ export default function AddProductToOrder({ productData, data, blobImage }) {
   const [addedProductImage, setAddedProductImage] = useState("");
 
   const newProductHandler = async () => {
+    if (!blobImage) return;
     setShowModal(true);
     setLoading(true);
 
     const clientSession = getCookie("clientSession");
     const uid = new ShortUniqueId({ length: 10 });
     const generatedId = uid.rnd();
-    console.log("id 1: ", generatedId);
-    console.log("id cid: ", clientSession);
     //const arrayBuffer = await newImageUrl.arrayBuffer();
 
     // Convertig rawBlobImage into an arrayBuffer to be uploaded to S3
@@ -88,18 +87,20 @@ export default function AddProductToOrder({ productData, data, blobImage }) {
           style={{
             minWidth: "30px",
             minHeight: "30px",
-            background: "#00EA9D",
+            background: blobImage ? "#00EA9D" : "#dedede",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
             borderRadius: "4px 0px 0px 4px",
             flexDirection: "column",
-            border: "1px solid green",
+            border: blobImage ? "1px solid green" : "1px solid #5555",
           }}
         >
           <p
             style={{
               fontSize: "20px",
+              fontWeight: 700,
+              color: blobImage ? "green" : "#5555",
             }}
           >
             +
@@ -112,8 +113,10 @@ export default function AddProductToOrder({ productData, data, blobImage }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            border: "1px solid green",
-            background: "#00EA9D",
+            border: blobImage ? "1px solid green" : "1px solid #5555",
+            background: blobImage ? "#00EA9D" : "#dedede",
+            color: blobImage ? "green" : "#5555",
+            fontWeight: 700,
           }}
         >
           <p>Agregar a la orden</p>

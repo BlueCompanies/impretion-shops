@@ -109,12 +109,13 @@ export default function ImageUploader({ setUserData, userData }) {
                   alignItems: "center",
                 }}
               >
-                <span>Agrega una imagen</span>
+                <span>Agrega una imagen de alguien que aprecies</span>
                 <Image
                   src="/icons/modals-and-messages/camera.webp"
                   width={40}
                   height={40}
                   alt="Add"
+                  accept="image/png, image/gif, image/jpeg"
                 />
               </div>
             )}

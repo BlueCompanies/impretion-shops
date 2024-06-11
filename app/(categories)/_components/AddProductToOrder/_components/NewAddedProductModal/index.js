@@ -75,7 +75,7 @@ export default function NewAddedProductModal({
                   <div style={{ width: "90%", marginTop: "10px" }}>
                     <FieldDescription>
                       Puedes ver tu carrito de compras en la esquina inferior
-                      derecha.
+                      derecha al dar click en "volver".
                     </FieldDescription>
                   </div>
                   <p style={{ fontSize: "11px" }}>
@@ -88,6 +88,7 @@ export default function NewAddedProductModal({
                 width={200}
                 height={200}
                 style={{ marginTop: "30px" }}
+                quality={10}
               ></Image>
               <button
                 onClick={() => setShowModal(false)}

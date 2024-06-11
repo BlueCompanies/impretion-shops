@@ -2,7 +2,7 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import Product from "./_components/Product";
 
-export default function SecondStep({ data }) {
+export default function SecondStep({ data, setExtraParam, extraParam }) {
   return (
     <div style={{ border: "1px solid #dedede", padding: "10px" }}>
       <div
@@ -30,10 +30,9 @@ export default function SecondStep({ data }) {
         </div>
         <div style={{ marginLeft: "10px" }}>
           <p style={{ fontWeight: 700 }}>PASO 2: PERSONALIZACIÓN</p>
-          <p style={{ fontSize: "12px" }}>
-            Comencemos por agregar el nombre y una frase memorable para esa
-            persona especial. Podras ver esto reflejado en el producto que
-            elijas.
+          <p style={{ fontSize: "13px" }}>
+            La imagen y el nombre que pongas se verán reflejados en el producto
+            que elijas.
           </p>
         </div>
       </div>
@@ -58,6 +57,8 @@ export default function SecondStep({ data }) {
           }}
           productUIType={1}
           data={data}
+          setExtraParam={setExtraParam}
+          extraParam={extraParam}
         ></Product>
 
         <Product
@@ -71,6 +72,9 @@ export default function SecondStep({ data }) {
               "https://xyzstorage.store/products%2Fmugs%2F66512ac2258a35db2bf5788f%2Fimages%2Fcolored-mug-placeholder%20.webp",
           }}
           productUIType={2}
+          data={data}
+          setExtraParam={setExtraParam}
+          extraParam={extraParam}
         ></Product>
 
         <Product
@@ -85,6 +89,8 @@ export default function SecondStep({ data }) {
           }}
           productUIType={1}
           data={data}
+          setExtraParam={setExtraParam}
+          extraParam={extraParam}
         ></Product>
       </div>
       <div style={{ marginTop: "10px" }}>

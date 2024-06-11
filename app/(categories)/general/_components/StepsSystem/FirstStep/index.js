@@ -3,6 +3,11 @@
 import ImageUploader from "./_components/ImageUpaloder";
 
 export default function FirstStep({ setUserData, userData }) {
+  const onChangeName = (event) => {
+    const name = event.target.value;
+    setUserData((prevState) => ({ ...prevState, name }));
+  };
+
   return (
     <div style={{ marginBottom: "10px" }}>
       <div
@@ -37,7 +42,7 @@ export default function FirstStep({ setUserData, userData }) {
           </div>
           <div style={{ marginLeft: "10px" }}>
             <p style={{ fontWeight: 700 }}>PASO 1: UN NOMBRE Y UNA FOTO</p>
-            <p style={{ fontSize: "12px" }}>
+            <p style={{ fontSize: "13px" }}>
               Comencemos por agregar el nombre y una frase memorable para esa
               persona especial. Podras ver esto reflejado en el producto que
               elijas.
@@ -56,7 +61,8 @@ export default function FirstStep({ setUserData, userData }) {
             marginBottom: "5px",
             fontSize: "16px",
           }}
-          placeholder="Nombre de un familiar o alguien que quieras mucho"
+          placeholder="El nombre de alguien que quieras mucho"
+          onChange={onChangeName}
         ></input>
         <ImageUploader setUserData={setUserData} userData={userData} />
       </div>

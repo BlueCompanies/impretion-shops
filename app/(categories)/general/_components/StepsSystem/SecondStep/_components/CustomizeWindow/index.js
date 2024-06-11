@@ -131,6 +131,7 @@ export default function CustomizeWindow({
                 fontSize: "12px",
                 background: "#E8E8E8",
               }}
+              onClick={() => assignDesingToProductHandler("no-design")}
             >
               <p style={{ fontWeight: 700 }}>¿No te gusto ningun diseño?</p>
               <p>¡te haremos uno que se ajuste a tus gustos!</p>

@@ -20,6 +20,7 @@ export default async function PrincipalPage({ searchParams }) {
           darle un toque unico a esas cosas que tanto quieres.
         </span>
 
+        {/*
         <div className={styles.categoryCard}>
           <div className={styles.categoryHead}>
             <h4>Productos para mascotas</h4>
@@ -76,14 +77,17 @@ export default async function PrincipalPage({ searchParams }) {
             </div>
           </div>
         </div>
+ */}
 
         <div className={styles.categoryCard}>
           <div className={styles.categoryHead}>
-            <h4>Productos para el hogar</h4>
+            <h4>Productos para personalizar</h4>
+            {/*
             <img
               src="/icons/presentation-icons/home.svg"
               className={styles.categoryIcon}
             ></img>
+             */}
           </div>
           <span className={styles.categoryDescription}>
             Multiples productos para que decores tu casa con fotos de familiares
@@ -92,6 +96,7 @@ export default async function PrincipalPage({ searchParams }) {
           </span>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div className={styles.separator}></div>
+            {/*
             <div className={styles.imagesContainer}>
               <img
                 className={styles.categoryImageExample}
@@ -114,6 +119,7 @@ export default async function PrincipalPage({ searchParams }) {
                 src="https://placehold.co/400"
               ></img>
             </div>
+             */}
             <div
               style={{
                 display: "flex",
