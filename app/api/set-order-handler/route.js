@@ -1,6 +1,7 @@
 import awsS3 from "@/app/_lib/aws/awsS3";
 import deleteOne from "@/app/_lib/dataHandlers/deleteOne";
 import insertOne from "@/app/_lib/dataHandlers/insertOne";
+import updateOne from "@/app/_lib/dataHandlers/updateOne";
 import { DeleteObjectsCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
 
@@ -11,6 +12,7 @@ export async function POST(req, res) {
   try {
     const body = await req.json();
     const { userData, userContactNumber } = body;
+    /*
     const { sessionId } = userData;
     const BUCKET_PREFIX = `impretion-shops/user-temp-sessions-files/${sessionId}/orders`;
 
@@ -43,6 +45,7 @@ export async function POST(req, res) {
           sessionId,
         });
       });
+     */
 
     await insertOne("orders", {
       userData,
@@ -51,6 +54,11 @@ export async function POST(req, res) {
         orderProcessed: false,
       },
     });
+
+    await updateOne(
+      { sessionId: userData.sessionId },
+      { $set: { isOrderProcessed: true } }
+    );
 
     return NextResponse.json({}, { status: 200 });
   } catch (error) {

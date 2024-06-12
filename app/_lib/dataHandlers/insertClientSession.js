@@ -26,6 +26,7 @@ export default async function insertClientSession(generatedSessionId) {
             },
             createdAt: now,
             formatedCreatedAt: colombianDate,
+            isOrderProcessed: false,
           },
         }),
       }
