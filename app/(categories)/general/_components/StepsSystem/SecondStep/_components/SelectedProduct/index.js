@@ -80,6 +80,7 @@ export default function SelectedProduct({
     };
 
     const configString = JSON.stringify(config);
+    console.log(configString);
     const encodedConfig = encodeURIComponent(configString);
     setPhotopeaString(encodedConfig);
   }, [designId]);
