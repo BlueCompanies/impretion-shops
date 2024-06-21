@@ -57,9 +57,10 @@ export default function SelectedProduct({
       setLoadingDesign(true);
       const { name, image } = userData;
       const { productRawName } = productData;
+      console.log(productRawName);
       console.log("Sending request to server...", userData);
       const response = await fetch(
-        "http://srv547224.hstgr.cloud/mockup-generator",
+        "https://srv547224.hstgr.cloud/mockup-generator",
         {
           method: "POST",
           headers: { "content-type": "application/json" },
