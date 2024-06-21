@@ -14,10 +14,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
-      <body className={inter.className}>
-        <SessionHandler />
-        <CustomerOrder />
-        {children}
+      <body
+        className={inter.className}
+        style={{ display: "flex", justifyContent: "center" }}
+      >
+        <div style={{ minWidth: "50%", position: "relative" }}>
+          <SessionHandler />
+          <CustomerOrder />
+          {children}
+        </div>
       </body>
     </html>
   );

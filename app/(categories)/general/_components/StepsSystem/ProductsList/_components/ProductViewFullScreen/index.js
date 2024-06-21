@@ -78,7 +78,6 @@ export default function ProductViewFullScreen({ blobImageUrl }) {
           <button
             onClick={() => setShowModalWindow(true)}
             style={{
-              position: "absolute",
               top: 1,
               right: 1,
               fontSize: "11px",

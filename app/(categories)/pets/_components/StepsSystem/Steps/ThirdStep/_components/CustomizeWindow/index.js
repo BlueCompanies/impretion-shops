@@ -168,6 +168,7 @@ export default function CustomizeWindow({
               position: "fixed",
               bottom: 1,
               width: "100%",
+              display: "flex",
             }}
           >
             <div
@@ -180,7 +181,7 @@ export default function CustomizeWindow({
               onClick={closeCustomizeWindow}
               style={{
                 height: "40px",
-                width: "100%",
+                width: "50%",
                 display: "flex",
                 alignItems: "center",
                 margin: "auto",

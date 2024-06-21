@@ -2,40 +2,15 @@ import Link from "next/link";
 import styles from "./styles.module.css";
 import Product from "./_components/Product";
 
-export default function SecondStep({ data, setExtraParam, extraParam }) {
+export default function ProductsList({
+  data,
+  setExtraParam,
+  extraParam,
+  setUserData,
+  userData,
+}) {
   return (
     <div style={{ border: "1px solid #dedede", padding: "10px" }}>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          marginBottom: "10px",
-        }}
-      >
-        <div
-          style={{
-            minWidth: "50px",
-            minHeight: "50px",
-            borderRadius: "50%",
-            background: "#5271FF",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontWeight: 700,
-            fontSize: "26px",
-            color: "#fff",
-          }}
-        >
-          2
-        </div>
-        <div style={{ marginLeft: "10px" }}>
-          <p style={{ fontWeight: 700 }}>PASO 2: PERSONALIZACIÓN</p>
-          <p style={{ fontSize: "13px" }}>
-            La imagen y el nombre que pongas se verán reflejados en el producto
-            que elijas.
-          </p>
-        </div>
-      </div>
       <div
         style={{
           background: "#fff",
@@ -59,6 +34,8 @@ export default function SecondStep({ data, setExtraParam, extraParam }) {
           data={data}
           setExtraParam={setExtraParam}
           extraParam={extraParam}
+          setUserData={setUserData}
+          userData={userData}
         ></Product>
 
         <Product
@@ -75,6 +52,8 @@ export default function SecondStep({ data, setExtraParam, extraParam }) {
           data={data}
           setExtraParam={setExtraParam}
           extraParam={extraParam}
+          setUserData={setUserData}
+          userData={userData}
         ></Product>
 
         <Product
@@ -91,6 +70,8 @@ export default function SecondStep({ data, setExtraParam, extraParam }) {
           data={data}
           setExtraParam={setExtraParam}
           extraParam={extraParam}
+          setUserData={setUserData}
+          userData={userData}
         ></Product>
       </div>
       <div style={{ marginTop: "10px" }}>

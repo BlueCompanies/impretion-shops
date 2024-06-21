@@ -7,6 +7,8 @@ export default function Product({
   setExtraParam,
   extraParam,
   productUIType,
+  setUserData,
+  userData,
 }) {
   return (
     <>
@@ -52,6 +54,8 @@ export default function Product({
             setExtraParam={setExtraParam}
             extraParam={extraParam}
             productUIType={productUIType}
+            setUserData={setUserData}
+            userData={userData}
           />
         </div>
       </div>

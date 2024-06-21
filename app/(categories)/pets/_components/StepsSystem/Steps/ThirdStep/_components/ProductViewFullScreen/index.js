@@ -60,6 +60,8 @@ export default function ProductViewFullScreen({ blobImageUrl }) {
               height: "100%",
               minWidth: "100%",
               width: "100%",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <img
@@ -67,10 +69,11 @@ export default function ProductViewFullScreen({ blobImageUrl }) {
                 blobImageUrl ||
                 "https://xyzstorage.store/impretion-shops%2Fproducts-placeholder%2Fmug-placeholder.png"
               }
-              width={450}
-              height={450}
+              width={350}
+              height={350}
               alt="Full screen image"
             ></img>
+            <img src=""></img>
           </div>
         </div>
       ) : (

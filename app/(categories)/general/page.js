@@ -1,7 +1,7 @@
 "use client";
-import FirstStep from "./_components/StepsSystem/FirstStep";
-import SecondStep from "./_components/StepsSystem/SecondStep";
+
 import { useState } from "react";
+import ProductsList from "./_components/StepsSystem/ProductsList";
 
 export default function Page() {
   const [userData, setUserData] = useState({
@@ -15,11 +15,13 @@ export default function Page() {
   return (
     <>
       <div style={{ margin: "10px" }}>
-        <FirstStep userData={userData} setUserData={setUserData} />
-        <SecondStep
+        {/*<FirstStep userData={userData} setUserData={setUserData} />*/}
+        <ProductsList
           data={userData}
           setExtraParam={setExtraParam}
           extraParam={extraParam}
+          setUserData={setUserData}
+          userData={userData}
         />
       </div>
     </>

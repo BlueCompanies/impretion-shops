@@ -9,6 +9,8 @@ export default function SelectedProduct({
   productUIType,
   setExtraParam,
   extraParam,
+  setUserData,
+  userData,
 }) {
   const [isCustomizing, setIsCustomizing] = useState(false);
   const [photopeaString, setPhotopeaString] = useState("");
@@ -51,17 +53,42 @@ export default function SelectedProduct({
   }, []);
 
   const assignDesingToProductHandler = async (designId) => {
-    if (designId === "no-design") {
-      setDesignId(designId);
-      return;
-    }
-
-    if (designId === designId) {
+    try {
       setLoadingDesign(true);
+      const { name, image } = userData;
+      const { productRawName } = productData;
+      console.log("Sending request to server...", userData);
+      const response = await fetch(
+        "http://srv547224.hstgr.cloud/mockup-generator",
+        {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            name,
+            image,
+            designId,
+            designs: "fathers-day-designs",
+            productType: productRawName,
+            sessionId: "PajdfbHuTlqqq",
+          }),
+        }
+      );
+
+      if (response.status === 200) {
+        const mockupUrl = await response.text();
+        console.log(mockupUrl);
+        setBlobImageUrl(mockupUrl);
+        setBlobImage(mockupUrl);
+      } else {
+        alert("Ha ocurrido un error!");
+      }
+    } catch (error) {
+      console.log("Fetch error:", error);
     }
-    setDesignId(designId);
+    setLoadingDesign(false);
   };
 
+  /*
   useEffect(() => {
     const name = data?.name?.length > 0 ? data?.name : "Nombre";
 
@@ -84,6 +111,7 @@ export default function SelectedProduct({
     const encodedConfig = encodeURIComponent(configString);
     setPhotopeaString(encodedConfig);
   }, [designId]);
+   */
 
   const closeCustomizeWindow = () => {
     setIsCustomizing(false);
@@ -98,20 +126,6 @@ export default function SelectedProduct({
 
   return (
     <>
-      {loadingDesign && <div>Loading...</div>}
-      {photopeaString && (
-        <iframe
-          key={designId} // Use the key to force re-render
-          src={`https://www.photopea.com#${photopeaString}`}
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "none",
-          }}
-          ref={photopeaRef}
-        ></iframe>
-      )}
-
       <CustomizeWindow
         isCustomizing={isCustomizing}
         productData={productData}
@@ -127,6 +141,8 @@ export default function SelectedProduct({
         setExtraParam={setExtraParam}
         extraParam={extraParam}
         data={data}
+        setUserData={setUserData}
+        userData={userData}
       />
 
       <div style={{ display: "flex", width: "100%" }}>
