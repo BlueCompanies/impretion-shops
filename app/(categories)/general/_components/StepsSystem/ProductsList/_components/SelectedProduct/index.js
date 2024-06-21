@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import CustomizeWindow from "../CustomizeWindow";
+import { getCookie } from "cookies-next";
 
 export default function SelectedProduct({
   productData,
@@ -57,7 +58,8 @@ export default function SelectedProduct({
       setLoadingDesign(true);
       const { name, image } = userData;
       const { productRawName } = productData;
-      console.log(productRawName);
+
+      const clientSession = getCookie("clientSession");
       console.log("Sending request to server...", userData);
       const response = await fetch(
         "https://srv547224.hstgr.cloud/mockup-generator",
@@ -65,12 +67,12 @@ export default function SelectedProduct({
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({
-            name,
-            image,
+            name: userData.name,
+            image: userData.image,
             designId,
             designs: "fathers-day-designs",
             productType: productRawName,
-            sessionId: "PajdfbHuTlqqq",
+            sessionId: clientSession,
           }),
         }
       );

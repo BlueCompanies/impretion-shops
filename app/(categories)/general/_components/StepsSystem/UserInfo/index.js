@@ -6,6 +6,7 @@ import ImageUploader from "./_components/ImageUploader";
 export default function UserInfo({ setUserData, userData }) {
   const onChangeName = (event) => {
     const name = event.target.value;
+    console.log(userData);
     setUserData((prevState) => ({ ...prevState, name }));
   };
 
