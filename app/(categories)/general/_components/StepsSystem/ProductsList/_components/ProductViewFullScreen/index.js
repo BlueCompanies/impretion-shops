@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function ProductViewFullScreen({ blobImageUrl }) {
+export default function ProductViewFullScreen({ blobImageUrl, designUrl }) {
   const [showModalWindow, setShowModalWindow] = useState(false);
 
   useEffect(() => {
@@ -60,6 +60,8 @@ export default function ProductViewFullScreen({ blobImageUrl }) {
               height: "100%",
               minWidth: "100%",
               width: "100%",
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <img
@@ -67,10 +69,22 @@ export default function ProductViewFullScreen({ blobImageUrl }) {
                 blobImageUrl ||
                 "https://xyzstorage.store/impretion-shops%2Fproducts-placeholder%2Fmug-placeholder.png"
               }
-              width={450}
-              height={450}
+              width={350}
+              height={350}
               alt="Full screen image"
             ></img>
+            <div
+              style={{
+                marginTop: "20px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <p>Diseño completo</p>
+              <Image src={designUrl} width={320} height={180}></Image>
+            </div>
           </div>
         </div>
       ) : (
@@ -78,6 +92,7 @@ export default function ProductViewFullScreen({ blobImageUrl }) {
           <button
             onClick={() => setShowModalWindow(true)}
             style={{
+              position: "absolute",
               top: 1,
               right: 1,
               fontSize: "11px",
@@ -86,6 +101,7 @@ export default function ProductViewFullScreen({ blobImageUrl }) {
               padding: "5px",
               borderRadius: "4px",
               background: "none",
+              zIndex: 999,
             }}
           >
             <p style={{ fontSize: "9px" }}>Expandir</p>

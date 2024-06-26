@@ -9,6 +9,7 @@ export default function Product({
   productUIType,
   setUserData,
   userData,
+  psdDesigns,
 }) {
   return (
     <>
@@ -56,6 +57,7 @@ export default function Product({
             productUIType={productUIType}
             setUserData={setUserData}
             userData={userData}
+            psdDesigns={psdDesigns}
           />
         </div>
       </div>

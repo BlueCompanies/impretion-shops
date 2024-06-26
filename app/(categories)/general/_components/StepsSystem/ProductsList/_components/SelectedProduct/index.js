@@ -12,10 +12,11 @@ export default function SelectedProduct({
   extraParam,
   setUserData,
   userData,
+  psdDesigns,
 }) {
   const [isCustomizing, setIsCustomizing] = useState(false);
-  const [photopeaString, setPhotopeaString] = useState("");
   const [designId, setDesignId] = useState(0); // Key to force iframe re-render
+  const [designUrl, setDesignUrl] = useState("");
   const [blobImage, setBlobImage] = useState("");
   const [blobImageUrl, setBlobImageUrl] = useState("");
   const [loadingDesign, setLoadingDesign] = useState(false);
@@ -40,7 +41,7 @@ export default function SelectedProduct({
           ? event.data
           : new Blob([event.data], { type: "image/png" });
 
-      // Create an object URL for the blob and set it as the new image URL
+      // Create an object URL for the blob and set it as the new image UR
       setBlobImageUrl(URL.createObjectURL(blob));
       setBlobImage(blob);
     }
@@ -53,12 +54,13 @@ export default function SelectedProduct({
     };
   }, []);
 
-  const assignDesingToProductHandler = async (designId) => {
+  const assignDesingToProductHandler = async (designId, designUrl) => {
     try {
       setLoadingDesign(true);
-      const { name, image } = userData;
+      setDesignId(designId);
+      setDesignUrl(designUrl);
       const { productRawName } = productData;
-
+      console.log(extraParam);
       const clientSession = getCookie("clientSession");
       console.log("Sending request to server...", userData);
       const response = await fetch(
@@ -70,16 +72,17 @@ export default function SelectedProduct({
             name: userData.name,
             image: userData.image,
             designId,
-            designs: "fathers-day-designs",
+            designs: psdDesigns,
             productType: productRawName,
             sessionId: clientSession,
+            additionalScript: extraParam.length > 0 ? extraParam : "",
           }),
         }
       );
+      console.log(response);
 
       if (response.status === 200) {
         const mockupUrl = await response.text();
-        console.log(mockupUrl);
         setBlobImageUrl(mockupUrl);
         setBlobImage(mockupUrl);
       } else {
@@ -90,6 +93,13 @@ export default function SelectedProduct({
     }
     setLoadingDesign(false);
   };
+
+  useEffect(() => {
+    console.log("ta vrg: ", extraParam);
+    if (extraParam.length > 0) {
+      assignDesingToProductHandler(designId, designUrl);
+    }
+  }, [extraParam]);
 
   /*
   useEffect(() => {
@@ -140,6 +150,7 @@ export default function SelectedProduct({
         closeCustomizeWindow={closeCustomizeWindow}
         loadingDesign={loadingDesign}
         designId={designId}
+        designUrl={designUrl}
         productUIType={productUIType}
         setExtraParam={setExtraParam}
         extraParam={extraParam}

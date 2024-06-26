@@ -10,7 +10,7 @@ export default function Page() {
   });
 
   // allows to change some functionalities in the special scripts
-  const [extraParam, setExtraParam] = useState();
+  const [extraParam, setExtraParam] = useState("");
 
   return (
     <>

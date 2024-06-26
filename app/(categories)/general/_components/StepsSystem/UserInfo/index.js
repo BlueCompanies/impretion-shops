@@ -74,6 +74,7 @@ export default function UserInfo({ setUserData, userData }) {
           }}
           placeholder="El nombre de alguien que quieras mucho"
           onChange={onChangeName}
+          value={userData.name}
         ></input>
         <ImageUploader setUserData={setUserData} userData={userData} />
       </div>

@@ -1,20 +1,22 @@
 import FieldDescription from "@/app/(categories)/_components/FieldDescription";
-import fathersDesigns from "@/app/_lib/designs/fathersDesigns.json";
 import Image from "next/image";
-import ProductViewFullScreen from "@/app/(categories)/pets/_components/StepsSystem/Steps/ThirdStep/_components/ProductViewFullScreen";
 import ProductExtraFunctionalities from "@/app/(categories)/_components/ProductExtraFunctionalities";
 import AddProductToOrder from "@/app/(categories)/_components/AddProductToOrder";
 import UserInfo from "../../../UserInfo";
+import ProductViewFullScreen from "../ProductViewFullScreen";
+import DesignsList from "../DesignsList";
+import generalFacts from "@/app/_lib/trivia/general.json";
+import BasicLoader from "@/app/(categories)/_components/Loadings/BasicLoader";
 
 export default function CustomizeWindow({
   productData,
   isCustomizing,
-  blobImage,
   blobImageUrl,
   closeCustomizeWindow,
   assignDesingToProductHandler,
   loadingDesign,
   designId,
+  designUrl,
   extraParam,
   setExtraParam,
   productUIType,
@@ -103,7 +105,10 @@ export default function CustomizeWindow({
                 position: "relative",
               }}
             >
-              <ProductViewFullScreen blobImageUrl={blobImageUrl} />
+              <ProductViewFullScreen
+                blobImageUrl={blobImageUrl}
+                designUrl={designUrl}
+              />
               <div
                 style={{
                   width: "100%",
@@ -132,10 +137,36 @@ export default function CustomizeWindow({
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",
+                        color: "#dedede",
+                        textAlign: "center",
+                        padding: "15px",
+                        fontSize: "14px",
                       }}
                     >
-                      <p style={{ fontSize: "11px", color: "#dedede" }}>
-                        Cargando tu diseño...
+                      <p
+                        style={{
+                          position: "absolute",
+                          left: 0,
+                          top: 1,
+                          margin: "10px",
+                        }}
+                      >
+                        Tu diseño esta cargando...
+                      </p>
+                      <div
+                        style={{
+                          position: "absolute",
+                          right: 0,
+                          bottom: 1,
+                        }}
+                      >
+                        <BasicLoader />
+                      </div>
+                      <p>Mientras esperas, ¿sabías que?:</p>
+                      <p>
+                        &quot;
+                        {generalFacts[Math.floor(Math.random() * 50)].fact}
+                        &quot;
                       </p>
                     </div>
                   </div>
@@ -202,23 +233,10 @@ export default function CustomizeWindow({
               </div>
               <div style={{ width: "100%", height: "400px" }}>
                 <div style={{ position: "relative" }}>
-                  {fathersDesigns.map((design, index) => (
-                    <img
-                      src={design.designUrl}
-                      onClick={() =>
-                        designId !== design.designId &&
-                        assignDesingToProductHandler(design.designId)
-                      }
-                      style={{
-                        width: "100%",
-                        height: "135px",
-                        marginTop: "3px",
-                        borderRadius: "4px",
-                        objectFit: "cover",
-                      }}
-                      key={index}
-                    ></img>
-                  ))}
+                  <DesignsList
+                    designId={designId}
+                    assignDesingToProductHandler={assignDesingToProductHandler}
+                  />
                 </div>
               </div>
             </div>
@@ -240,6 +258,7 @@ export default function CustomizeWindow({
               justifyContent: "center",
               alignContent: "center",
               height: "50px",
+              zIndex: 9999999,
             }}
           >
             <button
