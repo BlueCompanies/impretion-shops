@@ -6,7 +6,7 @@ import ImageUploader from "./_components/ImageUploader";
 export default function UserInfo({ setUserData, userData }) {
   const onChangeName = (event) => {
     const name = event.target.value;
-    console.log(userData);
+
     setUserData((prevState) => ({ ...prevState, name }));
   };
 
@@ -60,22 +60,26 @@ export default function UserInfo({ setUserData, userData }) {
           borderRadius: "4px",
         }}
       >
-        <input
-          type="text"
-          style={{
-            width: "100%",
-            height: "35px",
-            outline: "none",
-            border: "1px solid #dedede",
-            borderRadius: "4px",
-            padding: "5px",
-            marginBottom: "5px",
-            fontSize: "16px",
-          }}
-          placeholder="El nombre de alguien que quieras mucho"
-          onChange={onChangeName}
-          value={userData.name}
-        ></input>
+        <label>
+          <p style={{ fontSize: "14px" }}>Coloca algún nombre:</p>
+          <input
+            type="text"
+            style={{
+              width: "100%",
+              height: "35px",
+              outline: "none",
+              border: "1px solid #dedede",
+              borderRadius: "4px",
+              padding: "5px",
+              marginBottom: "5px",
+              fontSize: "16px",
+            }}
+            placeholder="Ejemplo: Maria Angel"
+            onChange={onChangeName}
+            value={userData.name}
+            maxLength={15}
+          ></input>
+        </label>
         <ImageUploader setUserData={setUserData} userData={userData} />
       </div>
     </div>

@@ -1,27 +1,37 @@
-import fathersDesigns from "@/app/_lib/designs/fathersDesigns.json";
+import general from "@/app/_lib/designs/general.json";
 
 export default function DesignsList({
-  designId,
+  designPSDId,
   assignDesingToProductHandler,
+  loadingDesign,
 }) {
   return (
     <>
-      {fathersDesigns.map((design, index) => (
-        <img
-          src={design.designUrl}
-          onClick={() =>
-            designId !== design.designId &&
-            assignDesingToProductHandler(design.designId, design.designUrl)
-          }
-          style={{
-            width: "100%",
-            height: "135px",
-            marginTop: "3px",
-            borderRadius: "4px",
-            objectFit: "cover",
-          }}
-          key={index}
-        ></img>
+      {general.map((design, index) => (
+        <div key={design.designPSDId}>
+          <img
+            src={design.designUrl}
+            onClick={() => {
+              if (!loadingDesign && designPSDId !== design.designPSDId) {
+                assignDesingToProductHandler(
+                  design.designPSDId,
+                  design.designUrl,
+                  ""
+                );
+              }
+            }}
+            style={{
+              width: "100%",
+              height: "135px",
+              marginTop: "3px",
+              borderRadius: "4px",
+              objectFit: "cover",
+              cursor: loadingDesign ? "not-allowed" : "pointer",
+              opacity: loadingDesign ? 0.5 : 1,
+            }}
+            key={design.designPSDId}
+          ></img>
+        </div>
       ))}
     </>
   );

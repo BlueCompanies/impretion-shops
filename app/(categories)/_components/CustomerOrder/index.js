@@ -19,7 +19,7 @@ export default function CustomerOrder({ clientSession }) {
   useEffect(() => {
     const clientSession = getCookie("clientSession");
     if (showOrderModal && clientSession) {
-      fetch("/api/get-order-data", {
+      fetch("/api/temporal-session-data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default function CustomerOrder({ clientSession }) {
   // Calculate total price
   const totalPrice =
     userData?.userOrder?.reduce(
-      (total, order) => total + parseFloat(order.data.productPrice),
+      (total, order) => total + parseFloat(order?.productData?.productPrice),
       0
     ) || 0;
 
@@ -140,8 +140,7 @@ export default function CustomerOrder({ clientSession }) {
             }}
           >
             <p>
-              La session ha expirado!, ya haz realizado tu orden, si deseas
-              realizar otro pedido, recarga la pagina o comunicate al 314
+              Tu sesión ha caducado, recarga la pagina para realizar tu orden.
             </p>
           </div>
         </div>
@@ -242,10 +241,10 @@ export default function CustomerOrder({ clientSession }) {
                     }}
                   >
                     <Image
-                      src={product.data.productMockupPreview}
+                      src={product?.productData?.productMockupPreview}
                       width={100}
                       height={100}
-                      alt={product.data.productFullName}
+                      alt={product?.productData?.productFullName}
                       quality={1}
                     />
                     <div
@@ -255,9 +254,9 @@ export default function CustomerOrder({ clientSession }) {
                       }}
                     >
                       <p style={{ fontWeight: 700, fontSize: "14px" }}>
-                        {product.data.productFullName}
+                        {product?.productData?.productFullName}
                       </p>
-                      <p>{product.data.productPrice} COP</p>
+                      <p>{product?.productData?.productPrice} COP</p>
                       <button
                         style={{
                           width: "100px",
@@ -270,11 +269,11 @@ export default function CustomerOrder({ clientSession }) {
                           color: "#fff",
                         }}
                         onClick={() =>
-                          deleteProductHandler(product.productId, index)
+                          deleteProductHandler(product?.productId, index)
                         }
                       >
                         {isDeletingLoader &&
-                        currentProductIdDeleted === product.productId ? (
+                        currentProductIdDeleted === product?.productId ? (
                           <p>Eliminando...</p>
                         ) : (
                           <p>Eliminar</p>
@@ -296,8 +295,8 @@ export default function CustomerOrder({ clientSession }) {
                   <p style={{ fontWeight: 700 }}>No hay productos</p>
                   <Image
                     src={"/images/placeholder-images/empty-shop-cart.svg"}
-                    width={300}
-                    height={300}
+                    width={150}
+                    height={150}
                   ></Image>
                   <p style={{ fontSize: "12px", textAlign: "center" }}>
                     No tienes productos en tu carrito de compras, selecciona,
@@ -327,7 +326,7 @@ export default function CustomerOrder({ clientSession }) {
                 </div>
                 <div style={{ marginTop: "10px" }}>
                   <label>
-                    Número de teléfono de contacto:
+                    Contacto:
                     <input
                       type="number"
                       style={{
@@ -401,29 +400,31 @@ export default function CustomerOrder({ clientSession }) {
           background: "#4D22A2",
           color: "#fff",
           margin: "10px",
-          borderRadius: "50%",
+          borderRadius: "4px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           boxShadow: "1px 1px 6px #555",
+          padding: "5px",
+          width: "160px",
         }}
         onClick={() => setShowOrderModal(true)}
       >
+        <p>Tu orden</p>
         {userData?.userOrder?.length > 0 && (
           <div
             style={{
               position: "absolute",
               top: 0,
-              left: 1,
+              right: 1,
               background: "red",
-              padding: "4px",
               borderRadius: "50%",
               width: "25px",
               height: "25px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              transform: "translateY(-6px)",
+              transform: "translate(10px, -12px)",
             }}
           >
             <p>{userData?.userOrder?.length}</p>
@@ -434,7 +435,6 @@ export default function CustomerOrder({ clientSession }) {
             src={"/icons/modals-and-messages/shop-cart-white.svg"}
             width={70}
             height={70}
-            style={{ margin: "auto 0px" }}
             alt="Shopping Cart"
           />
         </div>

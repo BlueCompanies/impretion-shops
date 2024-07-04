@@ -36,7 +36,7 @@ export default function ProductsList({
           extraParam={extraParam}
           setUserData={setUserData}
           userData={userData}
-          psdDesigns={"fathers-day-designs"}
+          psdDesigns={"general"}
         ></Product>
 
         <Product
@@ -55,7 +55,7 @@ export default function ProductsList({
           extraParam={extraParam}
           setUserData={setUserData}
           userData={userData}
-          psdDesigns={"fathers-day-designs"}
+          psdDesigns={"general"}
         ></Product>
 
         <Product
@@ -74,7 +74,7 @@ export default function ProductsList({
           extraParam={extraParam}
           setUserData={setUserData}
           userData={userData}
-          psdDesigns={"fathers-day-designs"}
+          psdDesigns={"general"}
         ></Product>
       </div>
       <div style={{ marginTop: "10px" }}>

@@ -7,11 +7,11 @@ export const runtime = "edge";
 export async function POST(req, res) {
   try {
     const body = await req.json();
-    const { clientSession, generatedId, data } = body;
+    const { clientSession, generatedId, productData } = body;
 
     await insertOrderData(clientSession, {
       productId: generatedId,
-      data,
+      productData,
     });
 
     return NextResponse.json({}, { status: 200 });

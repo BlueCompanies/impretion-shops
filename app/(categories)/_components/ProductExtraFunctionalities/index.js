@@ -6,7 +6,11 @@ export default function ProductExtraFunctionalities({
   productUIType,
   setExtraParam,
   extraParam,
-  blobImageUrl,
+  imageUrl,
+  designPSDId,
+  designUrl,
+  assignDesingToProductHandler,
+  loadingDesign,
 }) {
   const UI = {
     1: <></>,
@@ -14,9 +18,21 @@ export default function ProductExtraFunctionalities({
       <ColorsPalette
         setExtraParam={setExtraParam}
         extraParam={extraParam}
-        blobImageUrl={blobImageUrl}
+        imageUrl={imageUrl}
+        designPSDId={designPSDId}
+        designUrl={designUrl}
+        assignDesingToProductHandler={assignDesingToProductHandler}
       />
     ),
   };
-  return <>{UI[productUIType]}</>;
+  return (
+    <div
+      style={{
+        pointerEvents: loadingDesign ? "none" : "auto",
+        opacity: loadingDesign ? 0.5 : 1,
+      }}
+    >
+      {UI[productUIType]}
+    </div>
+  );
 }

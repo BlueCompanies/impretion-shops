@@ -1,5 +1,5 @@
 "use server";
-export default async function findOne(filter) {
+export default async function findOne(collection, filter) {
   try {
     const response = await fetch(
       "https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/findOne",
@@ -14,7 +14,7 @@ export default async function findOne(filter) {
         body: JSON.stringify({
           dataSource: "Impretion",
           database: "impretion-shops",
-          collection: "temporal-client-session",
+          collection,
           filter,
         }),
       }
@@ -22,6 +22,7 @@ export default async function findOne(filter) {
 
     const data = await response.json();
     const { document } = data;
+
     return document;
   } catch (error) {
     console.log(error);

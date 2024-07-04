@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import CustomizeWindow from "../CustomizeWindow";
 import { getCookie } from "cookies-next";
+import generalFacts from "@/app/_lib/trivia/general.json";
 
 export default function SelectedProduct({
   productData,
@@ -15,13 +16,13 @@ export default function SelectedProduct({
   psdDesigns,
 }) {
   const [isCustomizing, setIsCustomizing] = useState(false);
-  const [designId, setDesignId] = useState(0); // Key to force iframe re-render
+  const [designPSDId, setDesignPSDId] = useState(0); // Key to force iframe re-render
   const [designUrl, setDesignUrl] = useState("");
-  const [blobImage, setBlobImage] = useState("");
-  const [blobImageUrl, setBlobImageUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [loadingDesign, setLoadingDesign] = useState(false);
-  const photopeaRef = useRef(null);
+  const [fact, setFact] = useState("");
 
+  /*
   useEffect(() => {
     if (!photopeaRef.current) return;
     const wnd = photopeaRef.current.contentWindow;
@@ -42,27 +43,32 @@ export default function SelectedProduct({
           : new Blob([event.data], { type: "image/png" });
 
       // Create an object URL for the blob and set it as the new image UR
-      setBlobImageUrl(URL.createObjectURL(blob));
-      setBlobImage(blob);
+      setImageUrl(URL.createObjectURL(blob));
     }
   }
-
+  
   useEffect(() => {
     window.addEventListener("message", handleMessage);
     return () => {
       window.removeEventListener("message", handleMessage);
     };
   }, []);
+  */
 
-  const assignDesingToProductHandler = async (designId, designUrl) => {
+  const assignDesingToProductHandler = async (
+    designPSDId,
+    designUrl,
+    additionalScript
+  ) => {
     try {
       setLoadingDesign(true);
-      setDesignId(designId);
+      setDesignPSDId(designPSDId);
       setDesignUrl(designUrl);
+      setFact(generalFacts[Math.floor(Math.random() * 50)].fact);
       const { productRawName } = productData;
-      console.log(extraParam);
       const clientSession = getCookie("clientSession");
-      console.log("Sending request to server...", userData);
+      const designPSDUrl = `https://xyzstorage.store/impretion-shops/designs/${psdDesigns}/${productData.productRawName}/${designPSDId}.psd`;
+      console.log(designPSDUrl);
       const response = await fetch(
         "https://srv547224.hstgr.cloud/mockup-generator",
         {
@@ -71,20 +77,18 @@ export default function SelectedProduct({
           body: JSON.stringify({
             name: userData.name,
             image: userData.image,
-            designId,
+            designPSDUrl,
             designs: psdDesigns,
             productType: productRawName,
             sessionId: clientSession,
-            additionalScript: extraParam.length > 0 ? extraParam : "",
+            additionalScript,
           }),
         }
       );
-      console.log(response);
 
       if (response.status === 200) {
         const mockupUrl = await response.text();
-        setBlobImageUrl(mockupUrl);
-        setBlobImage(mockupUrl);
+        setImageUrl(mockupUrl);
       } else {
         alert("Ha ocurrido un error!");
       }
@@ -94,14 +98,16 @@ export default function SelectedProduct({
     setLoadingDesign(false);
   };
 
+  /*
   useEffect(() => {
-    console.log("ta vrg: ", extraParam);
-    if (extraParam.length > 0) {
+    let currentParam = "";
+    if (currentParam !== extraParam) {
+      console.log("did it?? ");
+      currentParam = extraParam;
       assignDesingToProductHandler(designId, designUrl);
     }
   }, [extraParam]);
 
-  /*
   useEffect(() => {
     const name = data?.name?.length > 0 ? data?.name : "Nombre";
 
@@ -132,24 +138,22 @@ export default function SelectedProduct({
 
   const openCustomizeWindow = () => {
     setIsCustomizing(true);
-    setBlobImage("");
-    setBlobImageUrl("");
-    setDesignId("");
+    setImageUrl("");
+    setDesignPSDId("");
   };
 
   return (
     <>
       <CustomizeWindow
         isCustomizing={isCustomizing}
+        psdDesigns={psdDesigns}
         productData={productData}
-        blobImage={blobImage}
-        blobImageUrl={blobImageUrl}
-        setBlobImageUrl={setBlobImageUrl}
-        setBlobImage={setBlobImage}
+        imageUrl={imageUrl}
+        setImageUrl={setImageUrl}
         assignDesingToProductHandler={assignDesingToProductHandler}
         closeCustomizeWindow={closeCustomizeWindow}
         loadingDesign={loadingDesign}
-        designId={designId}
+        designPSDId={designPSDId}
         designUrl={designUrl}
         productUIType={productUIType}
         setExtraParam={setExtraParam}
@@ -157,6 +161,7 @@ export default function SelectedProduct({
         data={data}
         setUserData={setUserData}
         userData={userData}
+        fact={fact}
       />
 
       <div style={{ display: "flex", width: "100%" }}>

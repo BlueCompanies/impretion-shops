@@ -20,7 +20,9 @@ export default function RootLayout({ children }) {
       >
         <div style={{ minWidth: "50%", position: "relative" }}>
           <SessionHandler />
+
           <CustomerOrder />
+
           {children}
         </div>
       </body>

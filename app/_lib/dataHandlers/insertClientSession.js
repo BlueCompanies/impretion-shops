@@ -1,7 +1,15 @@
-export default async function insertClientSession(generatedSessionId) {
+export default async function insertClientSession(generatedSessionId, shopRef) {
   try {
     const now = new Date();
-    const colombianDate = new Date(now.getTime() - 5 * 60 * 60 * 1000); // Adjust for UTC-5
+    const colombianDate = new Date(now.getTime() - 5 * 60 * 60 * 1000); // Ajustar para UTC-5
+
+    const day = colombianDate.getDate().toString().padStart(2, "0");
+    const month = (colombianDate.getMonth() + 1).toString().padStart(2, "0"); // Los meses en JavaScript son de 0 a 11
+    const year = colombianDate.getFullYear();
+    const hours = colombianDate.getHours().toString().padStart(2, "0");
+    const minutes = colombianDate.getMinutes().toString().padStart(2, "0");
+
+    const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
 
     const response = await fetch(
       "https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/insertOne",
@@ -19,13 +27,14 @@ export default async function insertClientSession(generatedSessionId) {
           collection: "temporal-client-session",
           document: {
             sessionId: generatedSessionId,
+            shopRef,
             userOrder: [],
             paymentTries: {
               cashPaymentTries: 3,
               onlinePaymentTries: 1,
             },
             createdAt: now,
-            formatedCreatedAt: colombianDate,
+            formatedCreatedAt: formattedDate,
             isOrderProcessed: false,
           },
         }),

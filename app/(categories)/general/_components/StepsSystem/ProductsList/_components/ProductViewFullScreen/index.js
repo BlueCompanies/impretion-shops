@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-export default function ProductViewFullScreen({ blobImageUrl, designUrl }) {
+export default function ProductViewFullScreen({ imageUrl, designUrl }) {
   const [showModalWindow, setShowModalWindow] = useState(false);
 
   useEffect(() => {
@@ -15,7 +15,6 @@ export default function ProductViewFullScreen({ blobImageUrl, designUrl }) {
       document.body.style.overflow = "auto";
     };
   }, []);
-
   return (
     <>
       {showModalWindow ? (
@@ -66,7 +65,7 @@ export default function ProductViewFullScreen({ blobImageUrl, designUrl }) {
           >
             <img
               src={
-                blobImageUrl ||
+                imageUrl ||
                 "https://xyzstorage.store/impretion-shops%2Fproducts-placeholder%2Fmug-placeholder.png"
               }
               width={350}
@@ -88,7 +87,7 @@ export default function ProductViewFullScreen({ blobImageUrl, designUrl }) {
           </div>
         </div>
       ) : (
-        blobImageUrl && (
+        imageUrl && (
           <button
             onClick={() => setShowModalWindow(true)}
             style={{
@@ -101,7 +100,7 @@ export default function ProductViewFullScreen({ blobImageUrl, designUrl }) {
               padding: "5px",
               borderRadius: "4px",
               background: "none",
-              zIndex: 999,
+              zIndex: 99999,
             }}
           >
             <p style={{ fontSize: "9px" }}>Expandir</p>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import FieldDescription from "../../../FieldDescription";
+import BasicLoader from "../../../Loadings/BasicLoader";
 
 export default function NewAddedProductModal({
   loading,
@@ -37,14 +38,26 @@ export default function NewAddedProductModal({
           alignItems: "center",
           flexDirection: "column",
           position: "relative",
+          padding: "10px",
+          textAlign: "center",
         }}
       >
         {/* Add any content you want inside the modal */}
         <div>
           {loading ? (
-            <>Agregando producto al carrito de compras...</>
-          ) : error ? (
-            `Error: ${error}`
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            >
+              <p>Agregando producto al carrito de compras...</p>
+              <BasicLoader />
+            </div>
+          ) : error.status ? (
+            `${error.message}`
           ) : (
             <div
               style={{

@@ -7,9 +7,9 @@ export const runtime = "edge";
 export async function POST(req, res) {
   try {
     const body = await req.json();
-    const { sessionId } = body;
+    const { sessionId, shopRef } = body;
 
-    await insertClientSession(sessionId);
+    await insertClientSession(sessionId, shopRef);
 
     return NextResponse.json({}, { status: 200 });
   } catch (error) {

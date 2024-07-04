@@ -5,17 +5,17 @@ import AddProductToOrder from "@/app/(categories)/_components/AddProductToOrder"
 import UserInfo from "../../../UserInfo";
 import ProductViewFullScreen from "../ProductViewFullScreen";
 import DesignsList from "../DesignsList";
-import generalFacts from "@/app/_lib/trivia/general.json";
 import BasicLoader from "@/app/(categories)/_components/Loadings/BasicLoader";
 
 export default function CustomizeWindow({
   productData,
+  psdDesigns,
   isCustomizing,
-  blobImageUrl,
+  imageUrl,
   closeCustomizeWindow,
   assignDesingToProductHandler,
   loadingDesign,
-  designId,
+  designPSDId,
   designUrl,
   extraParam,
   setExtraParam,
@@ -23,6 +23,7 @@ export default function CustomizeWindow({
   data,
   setUserData,
   userData,
+  fact,
 }) {
   return (
     <>
@@ -106,7 +107,7 @@ export default function CustomizeWindow({
               }}
             >
               <ProductViewFullScreen
-                blobImageUrl={blobImageUrl}
+                imageUrl={imageUrl}
                 designUrl={designUrl}
               />
               <div
@@ -165,14 +166,14 @@ export default function CustomizeWindow({
                       <p>Mientras esperas, ¿sabías que?:</p>
                       <p>
                         &quot;
-                        {generalFacts[Math.floor(Math.random() * 50)].fact}
+                        {fact}
                         &quot;
                       </p>
                     </div>
                   </div>
                 )}
                 <Image
-                  src={blobImageUrl || productData?.productImagePlaceholder}
+                  src={imageUrl || productData?.productImagePlaceholder}
                   width={250}
                   height={250}
                   style={{ position: "relative", zIndex: -2 }}
@@ -183,7 +184,11 @@ export default function CustomizeWindow({
               productUIType={productUIType}
               setExtraParam={setExtraParam}
               extraParam={extraParam}
-              blobImageUrl={blobImageUrl}
+              imageUrl={imageUrl}
+              assignDesingToProductHandler={assignDesingToProductHandler}
+              designPSDId={designPSDId}
+              designUrl={designUrl}
+              loadingDesign={loadingDesign}
             />
             <div
               style={{
@@ -226,7 +231,9 @@ export default function CustomizeWindow({
                   fontSize: "12px",
                   background: "#E8E8E8",
                 }}
-                onClick={() => assignDesingToProductHandler("no-design")}
+                onClick={() =>
+                  assignDesingToProductHandler("no-design", "", "")
+                }
               >
                 <p style={{ fontWeight: 700 }}>¿No te gusto ningun diseño?</p>
                 <p>¡te haremos uno que se ajuste a tus gustos!</p>
@@ -234,8 +241,9 @@ export default function CustomizeWindow({
               <div style={{ width: "100%", height: "400px" }}>
                 <div style={{ position: "relative" }}>
                   <DesignsList
-                    designId={designId}
+                    designPSDId={designPSDId}
                     assignDesingToProductHandler={assignDesingToProductHandler}
+                    loadingDesign={loadingDesign}
                   />
                 </div>
               </div>
@@ -294,8 +302,11 @@ export default function CustomizeWindow({
             </button>
             <AddProductToOrder
               productData={productData}
-              blobImageUrl={blobImageUrl}
-              data={data}
+              imageUrl={imageUrl}
+              designPSDId={designPSDId}
+              designUrl={designUrl}
+              psdDesigns={psdDesigns}
+              userData={userData}
             />
           </div>
         </div>

@@ -1,3 +1,4 @@
+import findOne from "@/app/_lib/dataHandlers/findOne";
 import insertOrderData from "@/app/_lib/dataHandlers/insertOrderData";
 import { NextResponse } from "next/server";
 
@@ -7,8 +8,12 @@ export const runtime = "edge";
 export async function POST(req, res) {
   try {
     const body = await req.json();
-
-    return NextResponse.json({}, { status: 200 });
+    const { clientSession } = body;
+    const data = await findOne("temporal-client-session", {
+      sessionId: clientSession,
+    });
+    console.log("deira returnd: ", data);
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json({}, { status: 404 });

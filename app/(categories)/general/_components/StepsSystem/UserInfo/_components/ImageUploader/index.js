@@ -5,6 +5,7 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import Image from "next/image";
 import ShortUniqueId from "short-unique-id";
 import BasicLoader from "@/app/(categories)/_components/Loadings/BasicLoader";
+import { getCookie } from "cookies-next";
 
 export default function ImageUploader({ setUserData, userData }) {
   const [uploadError, setUploadError] = useState("");
@@ -41,17 +42,18 @@ export default function ImageUploader({ setUserData, userData }) {
           setImageLoading(true);
           const uid = new ShortUniqueId({ length: 10 });
           const generatedId = uid.rnd();
+          const clientSession = getCookie("clientSession");
           // Create the PutObjectCommand
           let command = new PutObjectCommand({
             Bucket: "impretion",
-            Key: `test-images/${generatedId}.png`,
+            Key: `impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`,
             Body: arrayBuffer,
           });
 
           // Upload the image to S3
           await awsS3().send(command);
 
-          const generatedUrl = `https://xyzstorage.store/test-images/${generatedId}.png`;
+          const generatedUrl = `https://xyzstorage.store/impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`;
 
           // Create a URL for the image to display in the img tag
           setUserData({ ...userData, image: generatedUrl });

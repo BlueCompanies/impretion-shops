@@ -23,8 +23,6 @@ export default async function insertOrderData(clientSession, order) {
         }),
       }
     );
-
-    const data = await response.json();
   } catch (error) {
     console.log("Error updating document:", error);
   }
