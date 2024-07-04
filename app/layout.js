@@ -3,6 +3,7 @@ import "./globals.css";
 import SessionHandler from "./(categories)/_components/SessionHandler";
 import CustomerOrder from "./(categories)/_components/CustomerOrder";
 import { getCookie, getCookies } from "cookies-next";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({ children }) {
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div style={{ minWidth: "50%", position: "relative" }}>
-          <SessionHandler />
+          <Suspense fallback={"loading..."}>
+            <SessionHandler />
+          </Suspense>
 
           <CustomerOrder />
 
