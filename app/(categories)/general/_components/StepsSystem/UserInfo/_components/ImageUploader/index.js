@@ -46,7 +46,7 @@ export default function ImageUploader({ setUserData, userData }) {
           // Create the PutObjectCommand
           let command = new PutObjectCommand({
             Bucket: "impretion",
-            Key: `impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`,
+            Key: `/impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`,
             Body: arrayBuffer,
           });
 

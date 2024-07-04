@@ -12,7 +12,27 @@ export async function POST(req, res) {
   try {
     const body = await req.json();
     const { userData, userContactNumber } = body;
-    /*
+
+    await insertOne("orders", {
+      userData,
+      contactData: { telephone: userContactNumber },
+      orderStatus: "UNPROCESSED",
+    });
+
+    // We can diferentiate which users requested an order.
+    await updateOne(
+      { sessionId: userData.sessionId },
+      { $set: { hasRequestedOrder: true } }
+    );
+
+    return NextResponse.json({}, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({}, { status: 404 });
+  }
+}
+
+/*
     const { sessionId } = userData;
     const BUCKET_PREFIX = `impretion-shops/user-temp-sessions-files/${sessionId}/orders`;
 
@@ -46,23 +66,3 @@ export async function POST(req, res) {
         });
       });
      */
-
-    await insertOne("orders", {
-      userData,
-      userContactNumber,
-      orderStatus: {
-        orderProcessed: false,
-      },
-    });
-
-    await updateOne(
-      { sessionId: userData.sessionId },
-      { $set: { isOrderProcessed: true } }
-    );
-
-    return NextResponse.json({}, { status: 200 });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({}, { status: 404 });
-  }
-}
