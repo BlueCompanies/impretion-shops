@@ -12,7 +12,7 @@ export async function POST(req, res) {
     const data = await findOne("temporal-client-session", {
       sessionId: clientSession,
     });
-    console.log("deira returnd: ", data);
+
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     console.log(error);

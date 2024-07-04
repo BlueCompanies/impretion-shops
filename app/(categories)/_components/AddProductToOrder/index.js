@@ -23,7 +23,6 @@ export default function AddProductToOrder({
 
   const newProductHandler = async () => {
     if (!imageUrl) return;
-    console.log("pipi deira: ", userData);
     const clientSession = getCookie("clientSession");
     setLoading(true);
     setShowModal(true);

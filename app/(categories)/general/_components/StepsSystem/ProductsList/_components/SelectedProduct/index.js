@@ -68,7 +68,7 @@ export default function SelectedProduct({
       const { productRawName } = productData;
       const clientSession = getCookie("clientSession");
       const designPSDUrl = `https://xyzstorage.store/impretion-shops/designs/${psdDesigns}/${productData.productRawName}/${designPSDId}.psd`;
-      console.log(designPSDUrl);
+
       const response = await fetch(
         "https://srv547224.hstgr.cloud/mockup-generator",
         {

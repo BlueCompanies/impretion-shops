@@ -5,7 +5,6 @@ export const Photopea = {
     return new Promise((resolve) => {
       const outputArray = [];
       window.addEventListener("message", function messageHandle(e) {
-        console.log(e);
         if (e.source === contentWindow) {
           outputArray.push(e.data);
           if (e.data === "done") {
@@ -39,7 +38,6 @@ export const PSDFileLoader = async function (contentWindow, PSDFile) {
 };
 
 export const addImageAndWait = async function (contentWindow, imgURI) {
-  console.log(contentWindow);
   return new Promise(async (resolve) => {
     let layerCountOld = "done";
     while (layerCountOld === "done") {
@@ -50,7 +48,6 @@ export const addImageAndWait = async function (contentWindow, imgURI) {
     }
 
     let layerCountNew = layerCountOld;
-    console.log(layer);
 
     await Photopea.runScript(
       contentWindow,
