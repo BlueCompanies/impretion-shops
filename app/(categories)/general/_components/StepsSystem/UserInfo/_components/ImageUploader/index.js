@@ -46,7 +46,7 @@ export default function ImageUploader({ setUserData, userData }) {
           // Create the PutObjectCommand
           let command = new PutObjectCommand({
             Bucket: "impretion",
-            Key: `/impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`,
+            Key: `impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`,
             Body: arrayBuffer,
           });
 
@@ -54,7 +54,7 @@ export default function ImageUploader({ setUserData, userData }) {
           await awsS3().send(command);
 
           const generatedUrl = `https://xyzstorage.store/impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`;
-
+          console.log(generatedUrl);
           // Create a URL for the image to display in the img tag
           setUserData({ ...userData, image: generatedUrl });
           setImageLoading(false);

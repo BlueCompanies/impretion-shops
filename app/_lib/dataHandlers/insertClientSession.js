@@ -34,7 +34,7 @@ export default async function insertClientSession(generatedSessionId, shopRef) {
               onlinePaymentTries: 1,
             },
             createdAt: now,
-            formatedCreatedAt: formattedDate,
+            formattedCreatedSessionDate: formattedDate,
             hasRequestedOrder: false,
           },
         }),

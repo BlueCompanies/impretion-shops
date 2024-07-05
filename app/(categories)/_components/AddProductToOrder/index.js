@@ -47,29 +47,32 @@ export default function AddProductToOrder({
       return;
     }
 
-    const uid = new ShortUniqueId({ length: 10 });
-    const generatedId = uid.rnd();
-
+    /*
     // Convertig rawBlobImage into an arrayBuffer to be uploaded to S3
     const arrayBuffer = await new Response(imageUrl).arrayBuffer();
-
+    
     let url = imageUrl.substring("https://xyzstorage.store".length);
-
+    
     // Create the PutObjectCommand
     let command = new PutObjectCommand({
       Bucket: "impretion",
       Key: url,
       Body: arrayBuffer,
     });
-
+    
     // Upload the image to S3
     await awsS3()
-      .send(command)
-      .then((res) => {
-        if (res.$metadata.httpStatusCode === 200) {
-          setAddedProductImage(imageUrl);
-        }
-      });
+    .send(command)
+    .then((res) => {
+      if (res.$metadata.httpStatusCode === 200) {
+        setAddedProductImage(imageUrl);
+      }
+    });
+     */
+
+    setAddedProductImage(imageUrl);
+    const uid = new ShortUniqueId({ length: 10 });
+    const generatedId = uid.rnd();
 
     // Set order, save it on DB
     const newProduct = await fetch("/api/new-product", {

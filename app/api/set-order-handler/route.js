@@ -8,6 +8,17 @@ import { NextResponse } from "next/server";
 // set runtime to Edge
 export const runtime = "edge";
 
+const now = new Date();
+const colombianDate = new Date(now.getTime() - 5 * 60 * 60 * 1000); // Ajustar para UTC-5
+
+const day = colombianDate.getDate().toString().padStart(2, "0");
+const month = (colombianDate.getMonth() + 1).toString().padStart(2, "0"); // Los meses en JavaScript son de 0 a 11
+const year = colombianDate.getFullYear();
+const hours = colombianDate.getHours().toString().padStart(2, "0");
+const minutes = colombianDate.getMinutes().toString().padStart(2, "0");
+
+const formattedDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+
 export async function POST(req, res) {
   try {
     const body = await req.json();
@@ -17,6 +28,8 @@ export async function POST(req, res) {
       userData,
       contactData: { telephone: userContactNumber },
       orderStatus: "UNPROCESSED",
+      createdAt: Date.now(),
+      formattedOrderDate: formattedDate,
     });
 
     // We can diferentiate which users requested an order.
