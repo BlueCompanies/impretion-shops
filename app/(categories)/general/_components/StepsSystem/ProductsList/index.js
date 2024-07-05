@@ -77,6 +77,7 @@ export default function ProductsList({
           psdDesigns={"general"}
         ></Product>
       </div>
+      {/*
       <div style={{ marginTop: "10px" }}>
         <Link href={"http://localhost:3000?shopRef=rNGfsGUXaJ5gqctXyDX5VB"}>
           <p
@@ -97,6 +98,7 @@ export default function ProductsList({
         </Link>
         <div className={styles.verticalSeparator}></div>
       </div>
+       */}
     </div>
   );
 }
