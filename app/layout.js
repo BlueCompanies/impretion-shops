@@ -1,9 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SessionHandler from "./(categories)/_components/SessionHandler";
 import CustomerOrder from "./(categories)/_components/CustomerOrder";
-import { getCookie, getCookies } from "cookies-next";
-import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,16 +11,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="light">
+    <html lang="en">
       <body
         className={inter.className}
         style={{ display: "flex", justifyContent: "center" }}
       >
         <div style={{ minWidth: "50%", position: "relative" }}>
-          <Suspense fallback={"loading..."}>
-            <SessionHandler />
-          </Suspense>
-
           <CustomerOrder />
 
           {children}

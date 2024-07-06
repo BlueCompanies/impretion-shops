@@ -1,5 +1,6 @@
-import insertClientSession from "@/app/_lib/dataHandlers/insertClientSession";
+import insertOne from "@/app/_lib/dataHandlers/insertOne";
 import { NextResponse } from "next/server";
+import { formatInTimeZone } from "date-fns-tz";
 
 // set runtime to Edge
 export const runtime = "edge";
@@ -9,9 +10,29 @@ export async function POST(req, res) {
     const body = await req.json();
     const { sessionId, shopRef } = body;
 
-    await insertClientSession(sessionId, shopRef);
+    const date = new Date();
+    const formattedDate = formatInTimeZone(
+      date,
+      "America/Bogota",
+      "dd/MM/yyyy HH:mm"
+    );
+    console.log("f date: ", formattedDate);
 
-    return NextResponse.json({}, { status: 200 });
+    // Insert a new session into the DB
+    const response = await insertOne("temporal-client-session", {
+      sessionId,
+      shopRef,
+      userOrder: [],
+      createdAt: new Date(),
+      formattedCreatedSessionDate: formattedDate,
+      hasRequestedOrder: false,
+    });
+
+    if (response === 201) {
+      return NextResponse.json({}, { status: 201 });
+    } else {
+      return NextResponse.json({}, { status: 400 });
+    }
   } catch (error) {
     console.log(error);
     return NextResponse.json({}, { status: 404 });

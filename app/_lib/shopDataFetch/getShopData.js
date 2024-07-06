@@ -15,7 +15,7 @@ export const getShopData = async (shopRef) => {
           database: "impretion-shops",
           collection: "affiliated-shops",
           filter: {
-            shopId: shopRef,
+            shopRef,
           },
         }),
       }

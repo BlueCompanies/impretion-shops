@@ -21,6 +21,7 @@ export default function SelectedProduct({
   const [imageUrl, setImageUrl] = useState("");
   const [loadingDesign, setLoadingDesign] = useState(false);
   const [fact, setFact] = useState("");
+  const clientSession = getCookie("clientSession");
 
   /*
   useEffect(() => {
@@ -66,7 +67,6 @@ export default function SelectedProduct({
       setDesignUrl(designUrl);
       setFact(generalFacts[Math.floor(Math.random() * 50)].fact);
       const { productRawName } = productData;
-      const clientSession = getCookie("clientSession");
       const designPSDUrl = `https://xyzstorage.store/impretion-shops/designs/${psdDesigns}/${productData.productRawName}/${designPSDId}.psd`;
 
       const response = await fetch(
@@ -162,6 +162,7 @@ export default function SelectedProduct({
         setUserData={setUserData}
         userData={userData}
         fact={fact}
+        clientSession={clientSession}
       />
 
       <div style={{ display: "flex", width: "100%" }}>

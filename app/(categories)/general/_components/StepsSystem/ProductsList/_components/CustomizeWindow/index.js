@@ -20,10 +20,10 @@ export default function CustomizeWindow({
   extraParam,
   setExtraParam,
   productUIType,
-  data,
   setUserData,
   userData,
   fact,
+  clientSession,
 }) {
   return (
     <>
@@ -244,6 +244,7 @@ export default function CustomizeWindow({
                     designPSDId={designPSDId}
                     assignDesingToProductHandler={assignDesingToProductHandler}
                     loadingDesign={loadingDesign}
+                    clientSession={clientSession}
                   />
                 </div>
               </div>

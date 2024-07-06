@@ -1,18 +1,26 @@
 import styles from "./styles.module.css";
 import { getShopData } from "./_lib/shopDataFetch/getShopData";
 import Link from "next/link";
+import SessionHandler from "./(categories)/_components/SessionHandler";
 
 export const runtime = "edge";
 
-export default async function PrincipalPage({ searchParams }) {
+export default async function HomePage({ searchParams }) {
   // Obtener parámetros de búsqueda del código QR escaneado para obtener la información actual de la tienda
   const { shopRef } = searchParams;
-  const shopInfo = await getShopData(shopRef);
+
+  let shopInfo;
+  if ((shopRef?.length > 0 && shopRef !== null) || undefined) {
+    // If shopRef exists, assing shopInfo data
+    shopInfo = await getShopData(shopRef);
+  }
+
   const { shopName } = shopInfo || "";
 
   if (shopInfo && shopRef) {
     return (
       <main className={styles.main}>
+        <SessionHandler shopRef={shopRef} />
         <h1>Hola,</h1>
         <span>
           Bienvenido a impretion shops {shopName}, vamos a personalizar y a
@@ -76,7 +84,7 @@ export default async function PrincipalPage({ searchParams }) {
             </div>
           </div>
         </div>
- */}
+        */}
 
         <div className={styles.categoryCard}>
           <div className={styles.categoryHead}>
@@ -141,6 +149,22 @@ export default async function PrincipalPage({ searchParams }) {
       </main>
     );
   } else {
-    return <div>404 PAGE NOT FOUND</div>;
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          overflow: "hidden",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <img
+          style={{ width: "100%" }}
+          src="images/pings/not-affiliated-shop-found.png"
+        ></img>
+      </div>
+    );
   }
 }

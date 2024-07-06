@@ -1,9 +1,11 @@
 import general from "@/app/_lib/designs/general.json";
+import { useEffect } from "react";
 
 export default function DesignsList({
   designPSDId,
   assignDesingToProductHandler,
   loadingDesign,
+  clientSession,
 }) {
   return (
     <>
@@ -12,7 +14,11 @@ export default function DesignsList({
           <img
             src={design.designUrl}
             onClick={() => {
-              if (!loadingDesign && designPSDId !== design.designPSDId) {
+              if (
+                !loadingDesign &&
+                designPSDId !== design.designPSDId &&
+                clientSession
+              ) {
                 assignDesingToProductHandler(
                   design.designPSDId,
                   design.designUrl,

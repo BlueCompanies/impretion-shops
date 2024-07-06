@@ -20,10 +20,12 @@ export default async function insertOne(collection, body) {
         }),
       }
     );
-
-    const data = await response.json();
-    const { document } = data;
-    return document;
+    console.log(response.status);
+    if (response.status === 201) {
+      return 201;
+    } else {
+      return 400;
+    }
   } catch (error) {
     console.log(error);
   }
