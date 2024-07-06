@@ -103,30 +103,22 @@ export default async function HomePage({ searchParams }) {
           </span>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div className={styles.separator}></div>
-            {/*
+
             <div className={styles.imagesContainer}>
               <img
                 className={styles.categoryImageExample}
-                src="https://placehold.co/400"
+                src="/images/examples/normal.webp"
               ></img>
               <img
                 className={styles.categoryImageExample}
-                src="https://placehold.co/400"
+                src="/images/examples/magic.webp"
               ></img>
               <img
                 className={styles.categoryImageExample}
-                src="https://placehold.co/400"
-              ></img>
-              <img
-                className={styles.categoryImageExample}
-                src="https://placehold.co/400"
-              ></img>
-              <img
-                className={styles.categoryImageExample}
-                src="https://placehold.co/400"
+                src="/images/examples/colorid.webp"
               ></img>
             </div>
-             */}
+
             <div
               style={{
                 display: "flex",
