@@ -1,7 +1,5 @@
 "use server";
 
-import { connectionURI } from "../node_env";
-
 export default async function deleteOne(collection, filter) {
   try {
     const response = await fetch(

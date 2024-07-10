@@ -75,8 +75,8 @@ export default function CustomizeWindow({
               <div style={{ marginLeft: "10px" }}>
                 <p style={{ fontWeight: 700 }}>PASO 2: SELECCIONA UN DISEÑO</p>
                 <p style={{ fontSize: "13px" }}>
-                  Selecciona el diseño que te guste, la imagen y el nombre se
-                  reflejarán en él.
+                  Selecciona el diseño que te guste, la imagen y el nombre
+                  anterior se reflejarán en él.
                 </p>
               </div>
             </div>

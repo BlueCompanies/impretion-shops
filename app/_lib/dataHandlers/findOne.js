@@ -1,7 +1,5 @@
 "use server";
 
-import { connectionURI } from "../node_env/connection";
-
 export default async function findOne(collection, filter) {
   try {
     const response = await fetch(
