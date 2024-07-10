@@ -5,7 +5,7 @@ import { deleteCookie, getCookie } from "cookies-next";
 import FieldDescription from "../FieldDescription";
 import { useRouter, useSearchParams } from "next/navigation";
 
-export default function CustomerOrder({ clientSession }) {
+export default function CustomerOrder({}) {
   const [showOrderModal, setShowOrderModal] = useState(false);
   const [userData, setUserData] = useState([]);
   const [sessionExpired, setSessionExpired] = useState(false);

@@ -182,28 +182,26 @@ export default function SelectedProduct({
 
   return (
     <>
-      <Suspense fallback="loading...">
-        <CustomizeWindow
-          isCustomizing={isCustomizing}
-          psdDesigns={psdDesigns}
-          productData={productData}
-          imageUrl={imageUrl}
-          setImageUrl={setImageUrl}
-          assignDesingToProductHandler={assignDesingToProductHandler}
-          closeCustomizeWindow={closeCustomizeWindow}
-          loadingDesign={loadingDesign}
-          designPSDId={designPSDId}
-          designUrl={designUrl}
-          productUIType={productUIType}
-          setExtraParam={setExtraParam}
-          extraParam={extraParam}
-          data={data}
-          setUserData={setUserData}
-          userData={userData}
-          fact={fact}
-          clientSession={clientSession}
-        />
-      </Suspense>
+      <CustomizeWindow
+        isCustomizing={isCustomizing}
+        psdDesigns={psdDesigns}
+        productData={productData}
+        imageUrl={imageUrl}
+        setImageUrl={setImageUrl}
+        assignDesingToProductHandler={assignDesingToProductHandler}
+        closeCustomizeWindow={closeCustomizeWindow}
+        loadingDesign={loadingDesign}
+        designPSDId={designPSDId}
+        designUrl={designUrl}
+        productUIType={productUIType}
+        setExtraParam={setExtraParam}
+        extraParam={extraParam}
+        data={data}
+        setUserData={setUserData}
+        userData={userData}
+        fact={fact}
+        clientSession={clientSession}
+      />
 
       <div style={{ display: "flex", width: "100%" }}>
         <button
