@@ -6,6 +6,10 @@ import { useEffect, useState } from "react";
 export default function ProductViewFullScreen({ imageUrl, designUrl }) {
   const [showModalWindow, setShowModalWindow] = useState(false);
 
+  const closeFullScreenHandler = () => {
+    setShowModalWindow(false);
+  };
+
   useEffect(() => {
     // Disable scrolling
     document.body.style.overflow = "hidden";
@@ -15,6 +19,11 @@ export default function ProductViewFullScreen({ imageUrl, designUrl }) {
       document.body.style.overflow = "auto";
     };
   }, []);
+
+  const openFullScreenHandler = () => {
+    setShowModalWindow(true);
+  };
+
   return (
     <>
       {showModalWindow ? (
@@ -33,7 +42,7 @@ export default function ProductViewFullScreen({ imageUrl, designUrl }) {
           }}
         >
           <button
-            onClick={() => setShowModalWindow(false)}
+            onClick={() => closeFullScreenHandler()}
             style={{
               margin: "20px",
               position: "absolute",
@@ -89,7 +98,7 @@ export default function ProductViewFullScreen({ imageUrl, designUrl }) {
       ) : (
         imageUrl && (
           <button
-            onClick={() => setShowModalWindow(true)}
+            onClick={() => openFullScreenHandler()}
             style={{
               position: "absolute",
               top: 1,

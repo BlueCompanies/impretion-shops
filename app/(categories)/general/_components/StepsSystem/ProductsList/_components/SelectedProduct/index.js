@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import CustomizeWindow from "../CustomizeWindow";
 import { getCookie } from "cookies-next";
 import generalFacts from "@/app/_lib/trivia/general.json";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function SelectedProduct({
   productData,
@@ -22,6 +23,8 @@ export default function SelectedProduct({
   const [loadingDesign, setLoadingDesign] = useState(false);
   const [fact, setFact] = useState("");
   const clientSession = getCookie("clientSession");
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   /*
   useEffect(() => {
@@ -133,14 +136,49 @@ export default function SelectedProduct({
    */
 
   const closeCustomizeWindow = () => {
+    const currentUrl = new URL(window.location.href);
+    const searchParams = new URLSearchParams(currentUrl.search);
+
+    searchParams.delete("product");
+
+    router.push(`${currentUrl.pathname}?${searchParams.toString()}`, {
+      scroll: false,
+    });
+
     setIsCustomizing(false);
   };
 
   const openCustomizeWindow = () => {
-    setIsCustomizing(true);
     setImageUrl("");
     setDesignPSDId("");
+
+    // Get the current URL
+    const currentUrl = new URL(window.location.href);
+
+    // Get the current search params
+    const searchParams = new URLSearchParams(currentUrl.search);
+
+    // Add or update the 'product' parameter
+    searchParams.set("product", productData.productRawName);
+
+    // Update the URL without navigating
+    router.push(`${currentUrl.pathname}?${searchParams.toString()}`, {
+      scroll: false,
+    });
+
+    setIsCustomizing(true);
   };
+
+  // Ensure to close customize window if user goes "back"
+  useEffect(() => {
+    const currentUrl = new URL(window.location.href);
+    const searchParams = new URLSearchParams(currentUrl.search);
+    const currentProduct = searchParams.get("product");
+
+    if (!currentProduct) {
+      setIsCustomizing(false);
+    }
+  }, [router, searchParams]);
 
   return (
     <>
@@ -176,6 +214,8 @@ export default function SelectedProduct({
             padding: "4px",
             background: "#8c52ff",
             color: "#fff",
+            height: "30px",
+            fontWeight: 700,
           }}
           onClick={() => openCustomizeWindow()}
         >

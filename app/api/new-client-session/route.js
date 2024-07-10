@@ -16,7 +16,6 @@ export async function POST(req, res) {
       "America/Bogota",
       "dd/MM/yyyy HH:mm"
     );
-    console.log("f date: ", formattedDate);
 
     // Insert a new session into the DB
     const response = await insertOne("temporal-client-session", {

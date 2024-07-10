@@ -1,8 +1,11 @@
 "use server";
+
+import { connectionURI } from "../node_env/connection";
+
 export default async function findOne(collection, filter) {
   try {
     const response = await fetch(
-      "https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/findOne",
+      `https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/findOne`,
       {
         method: "POST",
         headers: {

@@ -1,9 +1,14 @@
 "use server";
 
 export default async function insertOne(collection, body) {
+  const devMode = process.env.CURRENT_ENV;
   try {
+    const document = {
+      ...body,
+      ...(devMode === "development" && { isInDevelopment: true }), // Conditionally add the property
+    };
     const response = await fetch(
-      "https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/insertOne",
+      `https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/insertOne`,
       {
         method: "POST",
         headers: {
@@ -16,17 +21,18 @@ export default async function insertOne(collection, body) {
           dataSource: "Impretion",
           database: "impretion-shops",
           collection,
-          document: body,
+          document,
         }),
       }
     );
-    console.log(response.status);
-    if (response.status === 201) {
-      return 201;
+    console.log(response);
+    if (response.status === 200 || response.status === 201) {
+      return response.status;
     } else {
       return 400;
     }
   } catch (error) {
     console.log(error);
+    return 500; // Returning an error status code
   }
 }

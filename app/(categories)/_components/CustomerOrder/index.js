@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { deleteCookie, getCookie } from "cookies-next";
 import FieldDescription from "../FieldDescription";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function CustomerOrder({ clientSession }) {
   const [showOrderModal, setShowOrderModal] = useState(false);
@@ -15,6 +16,8 @@ export default function CustomerOrder({ clientSession }) {
     isLoading: false,
     message: "",
   });
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const clientSession = getCookie("clientSession");
@@ -29,8 +32,51 @@ export default function CustomerOrder({ clientSession }) {
         const data = await res.json();
         setUserData(data);
       });
+
+      // Get the current URL
+      const currentUrl = new URL(window.location.href);
+
+      // Get the current search params
+      const searchParams = new URLSearchParams(currentUrl.search);
+
+      // Add or update the 'product' parameter
+      searchParams.set("showOrder", "true");
+
+      // Update the URL without navigating
+      router.push(`${currentUrl.pathname}?${searchParams.toString()}`, {
+        scroll: false,
+      });
+    }
+
+    if (!showOrderModal) {
+      const currentUrl = new URL(window.location.href);
+      const searchParams = new URLSearchParams(currentUrl.search);
+
+      searchParams.delete("showOrder");
+
+      router.push(`${currentUrl.pathname}?${searchParams.toString()}`, {
+        scroll: false,
+      });
     }
   }, [showOrderModal]);
+
+  // Makes sures to setShowOrderModal to false if searchParams changes
+  // This is for UX mobile experience back button
+  useEffect(() => {
+    const showOrderQuery = searchParams.get("showOrder");
+    if (!showOrderQuery) {
+      const currentUrl = new URL(window.location.href);
+      const searchParams = new URLSearchParams(currentUrl.search);
+
+      searchParams.delete("showOrder");
+
+      router.push(`${currentUrl.pathname}?${searchParams.toString()}`, {
+        scroll: false,
+      });
+
+      setShowOrderModal(false);
+    }
+  }, [router, searchParams]);
 
   const orderHandler = async () => {
     if (userData?.userOrder?.length > 0) {

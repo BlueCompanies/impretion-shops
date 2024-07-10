@@ -1,8 +1,11 @@
 "use server";
+
+import { connectionURI } from "../node_env";
+
 export default async function deleteOne(collection, filter) {
   try {
     const response = await fetch(
-      "https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/deleteOne",
+      `https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/deleteOne`,
       {
         method: "POST",
         headers: {
