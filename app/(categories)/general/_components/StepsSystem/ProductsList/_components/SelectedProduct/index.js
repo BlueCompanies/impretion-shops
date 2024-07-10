@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import CustomizeWindow from "../CustomizeWindow";
 import { getCookie } from "cookies-next";
 import generalFacts from "@/app/_lib/trivia/general.json";
@@ -182,26 +182,28 @@ export default function SelectedProduct({
 
   return (
     <>
-      <CustomizeWindow
-        isCustomizing={isCustomizing}
-        psdDesigns={psdDesigns}
-        productData={productData}
-        imageUrl={imageUrl}
-        setImageUrl={setImageUrl}
-        assignDesingToProductHandler={assignDesingToProductHandler}
-        closeCustomizeWindow={closeCustomizeWindow}
-        loadingDesign={loadingDesign}
-        designPSDId={designPSDId}
-        designUrl={designUrl}
-        productUIType={productUIType}
-        setExtraParam={setExtraParam}
-        extraParam={extraParam}
-        data={data}
-        setUserData={setUserData}
-        userData={userData}
-        fact={fact}
-        clientSession={clientSession}
-      />
+      <Suspense fallback="loading...">
+        <CustomizeWindow
+          isCustomizing={isCustomizing}
+          psdDesigns={psdDesigns}
+          productData={productData}
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          assignDesingToProductHandler={assignDesingToProductHandler}
+          closeCustomizeWindow={closeCustomizeWindow}
+          loadingDesign={loadingDesign}
+          designPSDId={designPSDId}
+          designUrl={designUrl}
+          productUIType={productUIType}
+          setExtraParam={setExtraParam}
+          extraParam={extraParam}
+          data={data}
+          setUserData={setUserData}
+          userData={userData}
+          fact={fact}
+          clientSession={clientSession}
+        />
+      </Suspense>
 
       <div style={{ display: "flex", width: "100%" }}>
         <button

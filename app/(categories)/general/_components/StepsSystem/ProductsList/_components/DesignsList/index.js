@@ -1,5 +1,4 @@
 import general from "@/app/_lib/designs/general.json";
-import { useEffect } from "react";
 
 export default function DesignsList({
   designPSDId,

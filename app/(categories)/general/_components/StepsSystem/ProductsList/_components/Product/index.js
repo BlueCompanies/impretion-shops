@@ -1,5 +1,6 @@
 import Image from "next/image";
 import SelectedProduct from "../SelectedProduct";
+import { Suspense } from "react";
 
 export default function Product({
   productData,
@@ -49,16 +50,18 @@ export default function Product({
           <p style={{ fontSize: "13px" }}>{productData?.productFullName}</p>
 
           <p style={{ margin: "5px" }}>{productData?.productPrice} COP</p>
-          <SelectedProduct
-            productData={productData}
-            data={data}
-            setExtraParam={setExtraParam}
-            extraParam={extraParam}
-            productUIType={productUIType}
-            setUserData={setUserData}
-            userData={userData}
-            psdDesigns={psdDesigns}
-          />
+          <Suspense fallback="loading...">
+            <SelectedProduct
+              productData={productData}
+              data={data}
+              setExtraParam={setExtraParam}
+              extraParam={extraParam}
+              productUIType={productUIType}
+              setUserData={setUserData}
+              userData={userData}
+              psdDesigns={psdDesigns}
+            />
+          </Suspense>
         </div>
       </div>
     </>
