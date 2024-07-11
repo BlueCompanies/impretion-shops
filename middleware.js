@@ -41,6 +41,11 @@ export function middleware(request) {
     return NextResponse.next();
   }
 
+  // Allows navigation
+  if (nextUrl.pathname.startsWith("/general") || nextUrl.pathname === "/") {
+    return NextResponse.next();
+  }
+
   // Check if the request is already on the target URL
   if (nextUrl.href === targetUrl.href) {
     return NextResponse.next();

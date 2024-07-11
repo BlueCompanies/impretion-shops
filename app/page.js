@@ -1,7 +1,7 @@
 import styles from "./styles.module.css";
 import { getShopData } from "./_lib/shopDataFetch/getShopData";
-import Link from "next/link";
 import SessionHandler from "./(categories)/_components/SessionHandler";
+import ContinueButton from "./(categories)/_components/Buttons/ContinueButton";
 
 export const runtime = "edge";
 
@@ -129,15 +129,7 @@ export default async function HomePage({ searchParams }) {
                 alignItems: "center",
               }}
             >
-              <Link
-                href={{
-                  pathname: "/general",
-                  query: { shopRef },
-                }}
-                style={{ width: "100%" }}
-              >
-                <div className={styles.continueBtn}>Continuar</div>
-              </Link>
+              <ContinueButton searchParam={searchParams} />
             </div>
           </div>
         </div>
