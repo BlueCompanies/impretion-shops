@@ -8,8 +8,25 @@ export default function DesignsList({
 }) {
   return (
     <>
-      {general.map((design, index) => (
-        <div key={design.designPSDId}>
+      {general.map((design) => (
+        <div key={design.designPSDId} style={{ position: "relative" }}>
+          {designPSDId === design.designPSDId && (
+            <div
+              style={{
+                position: "absolute",
+                zIndex: 9999999,
+                padding: "5px",
+                background: "#000",
+                opacity: "0.4",
+                margin: "7px",
+                borderRadius: "4px",
+                color: "#fff",
+                fontSize: "12px",
+              }}
+            >
+              Diseño seleccionado
+            </div>
+          )}
           <img
             src={design.designUrl}
             onClick={() => {
@@ -34,7 +51,6 @@ export default function DesignsList({
               cursor: loadingDesign ? "not-allowed" : "pointer",
               opacity: loadingDesign ? 0.5 : 1,
             }}
-            key={design.designPSDId}
           ></img>
         </div>
       ))}

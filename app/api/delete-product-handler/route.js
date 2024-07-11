@@ -1,7 +1,4 @@
-import awsS3 from "@/app/_lib/aws/awsS3";
-import insertOrderData from "@/app/_lib/dataHandlers/insertOrderData";
 import updateOne from "@/app/_lib/dataHandlers/updateOne";
-import { DeleteObjectsCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
 
 // set runtime to Edge
@@ -12,6 +9,7 @@ export async function POST(req, res) {
     const body = await req.json();
     const { productId } = body;
     await updateOne(
+      "temporal-client-session",
       { "userOrder.productId": productId }, // filter
       { $pull: { userOrder: { productId: productId } } } // update
     );

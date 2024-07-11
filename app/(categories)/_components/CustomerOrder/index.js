@@ -30,6 +30,7 @@ export default function CustomerOrder({}) {
         body: JSON.stringify({ clientSession }),
       }).then(async (res) => {
         const data = await res.json();
+        console.log(data);
         setUserData(data);
       });
 
@@ -87,7 +88,7 @@ export default function CustomerOrder({}) {
       }
       setNewOrderModal({
         isLoading: true,
-        message: "Realizando orden...",
+        message: "Realizando pedido...",
       });
 
       // orderData contains user's session/extra data
@@ -153,7 +154,7 @@ export default function CustomerOrder({}) {
   // Calculate total price
   const totalPrice =
     userData?.userOrder?.reduce(
-      (total, order) => total + parseFloat(order?.productData?.productPrice),
+      (total, order) => total + parseFloat(order?.productPrice),
       0
     ) || 0;
 
@@ -265,6 +266,17 @@ export default function CustomerOrder({}) {
 
           <div style={{ marginTop: "80px", height: "100%" }}>
             <h2>Tu orden</h2>
+            {userData?.userOrder?.length > 0 && (
+              <p style={{ fontSize: "15px", margin: "5px" }}>
+                Tienes {userData?.userOrder?.length}
+                {userData?.userOrder?.length > 1 ? (
+                  <span> productos</span>
+                ) : (
+                  <span> producto</span>
+                )}
+                <span> en tu orden, ahora puedes realizar tu pedido.</span>
+              </p>
+            )}
             <div
               style={{
                 border: "1px solid #dedede",
@@ -287,10 +299,10 @@ export default function CustomerOrder({}) {
                     }}
                   >
                     <Image
-                      src={product?.productData?.productMockupPreview}
+                      src={product?.productMockupPreview}
                       width={100}
                       height={100}
-                      alt={product?.productData?.productFullName}
+                      alt={product?.productMockupPreview}
                       quality={1}
                     />
                     <div
@@ -300,9 +312,9 @@ export default function CustomerOrder({}) {
                       }}
                     >
                       <p style={{ fontWeight: 700, fontSize: "14px" }}>
-                        {product?.productData?.productFullName}
+                        {product?.productFullName}
                       </p>
-                      <p>{product?.productData?.productPrice} COP</p>
+                      <p>{product?.productPrice} COP</p>
                       <button
                         style={{
                           width: "100px",

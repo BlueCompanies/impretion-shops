@@ -1,5 +1,4 @@
 import findOne from "@/app/_lib/dataHandlers/findOne";
-import insertOrderData from "@/app/_lib/dataHandlers/insertOrderData";
 import { NextResponse } from "next/server";
 
 export const runtime = "edge";

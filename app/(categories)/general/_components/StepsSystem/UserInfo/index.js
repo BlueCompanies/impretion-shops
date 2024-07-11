@@ -44,10 +44,12 @@ export default function UserInfo({ setUserData, userData }) {
         </div>
         <div style={{ marginLeft: "10px" }}>
           <p style={{ fontWeight: 700 }}>PASO 1: UNA IMAGEN Y UN NOMBRE</p>
+          {/*
           <p style={{ fontSize: "13px" }}>
             La imagen y el nombre que pongas se verán reflejados en el producto
             que elijas.
           </p>
+           */}
         </div>
       </div>
       <FieldDescription>

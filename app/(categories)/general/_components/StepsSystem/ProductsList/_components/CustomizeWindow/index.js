@@ -74,10 +74,12 @@ export default function CustomizeWindow({
               </div>
               <div style={{ marginLeft: "10px" }}>
                 <p style={{ fontWeight: 700 }}>PASO 2: SELECCIONA UN DISEÑO</p>
+                {/*
                 <p style={{ fontSize: "13px" }}>
                   Selecciona el diseño que te guste, la imagen y el nombre
                   anterior se reflejarán en él.
                 </p>
+                 */}
               </div>
             </div>
             <FieldDescription>
@@ -200,12 +202,14 @@ export default function CustomizeWindow({
                 justifyContent: "center",
               }}
             >
-              <p style={{ color: "#55555" }}>Selecciona un diseño</p>
+              <p style={{ color: "#55555", fontSize: "12px" }}>
+                Selecciona algún diseño de nuestro listado:
+              </p>
             </div>
             <div
               style={{
                 border: "1px solid #dedede",
-                height: "350px",
+                height: "550px",
                 borderRadius: "0px 0px 4px 4px",
                 padding: "10px",
                 overflowY: "auto",
@@ -217,6 +221,7 @@ export default function CustomizeWindow({
                 flexDirection: "column",
               }}
             >
+              {/*
               <div
                 style={{
                   width: "100%",
@@ -238,7 +243,8 @@ export default function CustomizeWindow({
                 <p style={{ fontWeight: 700 }}>¿No te gusto ningun diseño?</p>
                 <p>¡te haremos uno que se ajuste a tus gustos!</p>
               </div>
-              <div style={{ width: "100%", height: "400px" }}>
+               */}
+              <div style={{ width: "100%", height: "550px" }}>
                 <div style={{ position: "relative" }}>
                   <DesignsList
                     designPSDId={designPSDId}

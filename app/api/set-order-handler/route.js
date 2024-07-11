@@ -24,6 +24,7 @@ export async function POST(req, res) {
     const body = await req.json();
     const { userData, userContactNumber } = body;
 
+    // Inserts a new order
     await insertOne("orders", {
       userData,
       contactData: { telephone: userContactNumber },
@@ -32,8 +33,9 @@ export async function POST(req, res) {
       formattedOrderDate: formattedDate,
     });
 
-    // We can diferentiate which users requested an order.
+    // hasRequestedOrder is set to "true" so the is it possible to identify the users that already ordered.
     await updateOne(
+      "temporal-client-session",
       { sessionId: userData.sessionId },
       { $set: { hasRequestedOrder: true } }
     );

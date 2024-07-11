@@ -88,7 +88,7 @@ export default async function HomePage({ searchParams }) {
 
         <div className={styles.categoryCard}>
           <div className={styles.categoryHead}>
-            <h4>Productos para personalizar</h4>
+            <h4>Mugs para personalizar</h4>
             {/*
             <img
               src="/icons/presentation-icons/home.svg"
@@ -96,11 +96,14 @@ export default async function HomePage({ searchParams }) {
             ></img>
              */}
           </div>
-          <span className={styles.categoryDescription}>
-            Multiples productos para que decores tu casa con fotos de familiares
-            y diseños unicos, dale a tu hogar ese toque especial que todos
-            buscamos!.
-          </span>
+          <p className={styles.categoryDescription}>
+            Tres tipos de tazas para personalizar con diferentes diseños. Añade
+            las
+            <span style={{ textDecoration: "underline" }}> imágenes</span> y
+            <span style={{ textDecoration: "underline" }}> nombres</span> de esa
+            persona especial.
+          </p>
+
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div className={styles.separator}></div>
 
@@ -133,7 +136,7 @@ export default async function HomePage({ searchParams }) {
                 }}
                 style={{ width: "100%" }}
               >
-                <button className={styles.continueBtn}>Continuar</button>
+                <div className={styles.continueBtn}>Continuar</div>
               </Link>
             </div>
           </div>

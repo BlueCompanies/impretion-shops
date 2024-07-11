@@ -5,6 +5,7 @@ import CustomizeWindow from "../CustomizeWindow";
 import { getCookie } from "cookies-next";
 import generalFacts from "@/app/_lib/trivia/general.json";
 import { useRouter, useSearchParams } from "next/navigation";
+import FieldDescription from "@/app/(categories)/_components/FieldDescription";
 
 export default function SelectedProduct({
   productData,

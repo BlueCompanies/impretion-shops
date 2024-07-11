@@ -1,6 +1,6 @@
 "use server";
 
-export default async function updateOne(filter, update) {
+export default async function updateOne(collection, filter, update) {
   try {
     const response = await fetch(
       "https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/updateOne",
@@ -15,17 +15,23 @@ export default async function updateOne(filter, update) {
         body: JSON.stringify({
           dataSource: "Impretion",
           database: "impretion-shops",
-          collection: "temporal-client-session",
+          collection,
           filter,
           update,
         }),
       }
     );
 
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`API response error: ${response.status} ${errorText}`);
+    }
+
     const data = await response.json();
-    const { document } = data;
-    return document;
+
+    return data;
   } catch (error) {
-    console.log(error);
+    console.log("Error in updateOne:", error.message);
+    throw error;
   }
 }
