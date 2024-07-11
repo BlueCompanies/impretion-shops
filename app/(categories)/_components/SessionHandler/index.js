@@ -6,6 +6,8 @@ import ShortUniqueId from "short-unique-id";
 
 export default function SessionHandler({ shopRef }) {
   const clientSession = getCookie("clientSession");
+  const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000;
+  const tenYearsInMilliseconds = 10 * oneYearInMilliseconds;
 
   useEffect(() => {
     if (!clientSession) {
@@ -25,7 +27,10 @@ export default function SessionHandler({ shopRef }) {
             }),
           });
 
-          setCookie("clientSession", generatedSessionId);
+          setCookie("clientSession", generatedSessionId, {
+            maxAge: tenYearsInMilliseconds,
+            path: "/",
+          });
         }
       })();
     }

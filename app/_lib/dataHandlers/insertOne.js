@@ -32,7 +32,6 @@ export default async function insertOne(collectionName, body) {
     );
 
     const responseData = await response.json();
-    console.log(responseData);
 
     if (response.ok) {
       return responseData;

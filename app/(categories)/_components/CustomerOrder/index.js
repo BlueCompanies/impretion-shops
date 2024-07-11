@@ -30,7 +30,7 @@ export default function CustomerOrder({}) {
         body: JSON.stringify({ clientSession }),
       }).then(async (res) => {
         const data = await res.json();
-        console.log(data);
+
         setUserData(data);
       });
 
