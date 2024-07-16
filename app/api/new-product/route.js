@@ -1,5 +1,5 @@
 // POST API route
-import updateOne from "@/app/_lib/dataHandlers/updateOne";
+import updateOne from "@/app/_lib/queries/updateOne";
 import { NextResponse } from "next/server";
 
 export const runtime = "edge";

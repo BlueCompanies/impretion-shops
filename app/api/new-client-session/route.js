@@ -1,4 +1,4 @@
-import insertOne from "@/app/_lib/dataHandlers/insertOne";
+import insertOne from "@/app/_lib/queries/insertOne";
 import { NextResponse } from "next/server";
 import { formatInTimeZone } from "date-fns-tz";
 
@@ -18,7 +18,7 @@ export async function POST(req, res) {
     );
 
     // Insert a new session into the DB
-    const response = await insertOne("temporal-client-session", {
+    const response = await insertOne("temporal-client-session-test", {
       sessionId,
       shopRef,
       userOrder: [],

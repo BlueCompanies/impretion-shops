@@ -1,13 +1,14 @@
 "use client";
 
+import findOne from "@/app/_lib/queries/findOne";
+import insertOne from "@/app/_lib/queries/insertOne";
 import { getCookie, hasCookie, setCookie } from "cookies-next";
 import { useEffect } from "react";
 import ShortUniqueId from "short-unique-id";
+import { formatInTimeZone } from "date-fns-tz";
 
 export default function SessionHandler({ shopRef }) {
   const clientSession = getCookie("clientSession");
-  const oneYearInMilliseconds = 365 * 24 * 60 * 60 * 1000;
-  const tenYearsInMilliseconds = 10 * oneYearInMilliseconds;
 
   useEffect(() => {
     if (!clientSession) {
@@ -16,21 +17,35 @@ export default function SessionHandler({ shopRef }) {
           const uid = new ShortUniqueId({ length: 10 });
           const generatedSessionId = uid.rnd();
 
-          await fetch("/api/new-client-session", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              sessionId: generatedSessionId,
-              shopRef,
-            }),
+          const session = await findOne("temporal-client-session", {
+            sessionId: generatedSessionId,
           });
+          console.log(session);
+          // if there is not session add it to the DB, then add the cookie
+          if (!session) {
+            try {
+              const date = new Date();
+              const formattedDate = formatInTimeZone(
+                date,
+                "America/Bogota",
+                "dd/MM/yyyy HH:mm"
+              );
 
-          setCookie("clientSession", generatedSessionId, {
-            maxAge: tenYearsInMilliseconds,
-            path: "/",
-          });
+              // Insert a new session into the DB
+              await insertOne("temporal-client-session", {
+                sessionId: generatedSessionId,
+                shopRef,
+                userOrder: [],
+                createdAt: new Date(),
+                formattedCreatedSessionDate: formattedDate,
+                hasRequestedOrder: false,
+              });
+            } catch (error) {
+              console.log(error);
+            }
+          }
+
+          setCookie("clientSession", generatedSessionId);
         }
       })();
     }

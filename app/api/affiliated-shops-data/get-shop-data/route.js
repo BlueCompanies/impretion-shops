@@ -1,4 +1,4 @@
-import findOne from "@/app/_lib/dataHandlers/findOne";
+import findOne from "@/app/_lib/queries/findOne";
 import { NextResponse } from "next/server";
 
 export const runtime = "edge";

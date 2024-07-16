@@ -1,7 +1,7 @@
 import awsS3 from "@/app/_lib/aws/awsS3";
-import deleteOne from "@/app/_lib/dataHandlers/deleteOne";
-import insertOne from "@/app/_lib/dataHandlers/insertOne";
-import updateOne from "@/app/_lib/dataHandlers/updateOne";
+import deleteOne from "@/app/_lib/queries/deleteOne";
+import insertOne from "@/app/_lib/queries/insertOne";
+import updateOne from "@/app/_lib/queries/updateOne";
 import { DeleteObjectsCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
 
