@@ -6,7 +6,7 @@ export default async function findOne(collection, filter) {
 
   // If development as devMode add in test/db collection (this is a temporal solution for development)
   const databaseEnv =
-    devMode === "development" ? `impretion-shops-test` : "impretion-shops";
+    devMode === "development" ? "impretion-shops-test" : "impretion-shops";
 
   try {
     const response = await fetch(

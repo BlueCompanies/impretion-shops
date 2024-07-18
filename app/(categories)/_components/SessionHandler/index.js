@@ -32,7 +32,7 @@ export default function SessionHandler({ shopRef }) {
               );
 
               // Insert a new session into the DB
-              const data = await insertOne("temporal-client-session", {
+              await insertOne("temporal-client-session", {
                 sessionId: generatedSessionId,
                 shopRef,
                 userOrder: [],
@@ -40,7 +40,6 @@ export default function SessionHandler({ shopRef }) {
                 formattedCreatedSessionDate: formattedDate,
                 hasRequestedOrder: false,
               });
-              console.log("inserted session", data);
             } catch (error) {
               console.log(error);
             }

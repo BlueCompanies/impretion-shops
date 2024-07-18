@@ -12,7 +12,7 @@ export default async function insertOne(collection, body) {
 
     // If development as devMode add in test/db collection (this is a temporal solution for development)
     const databaseEnv =
-      devMode === "development" ? `impretion-shops-test` : "impretion-shops";
+      devMode === "development" ? "impretion-shops-test" : "impretion-shops";
 
     const response = await fetch(
       `https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/insertOne`,
@@ -33,8 +33,6 @@ export default async function insertOne(collection, body) {
     );
 
     const responseData = await response.json();
-
-    console.log(responseData, "RESPONSEDATA");
 
     if (response.ok) {
       return responseData;

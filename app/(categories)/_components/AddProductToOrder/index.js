@@ -25,11 +25,14 @@ export default function AddProductToOrder({
     const clientSession = getCookie("clientSession");
     setLoading(true);
     setShowModal(true);
+    console.log(clientSession);
 
     // Validates if the current session is on the DB yet, if there is not return a message to reload.
     const data = await findOne("temporal-client-session", {
       sessionId: clientSession,
     });
+
+    console.log(data);
 
     if (!data) {
       setError({
