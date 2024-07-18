@@ -1,7 +1,7 @@
 "use server";
 
 export default async function findOne(collection, filter) {
-  const devMode = "production";
+  const devMode = process.env.NEXT_PUBLIC_CURRENT_ENV;
   const API_KEY = process.env.HTTP_ENDPOINTS_API_KEY;
 
   // If development as devMode add in test/db collection (this is a temporal solution for development)
@@ -26,7 +26,7 @@ export default async function findOne(collection, filter) {
         }),
       }
     );
-
+    console.log(response);
     const data = await response.json();
     const { document } = data;
 
