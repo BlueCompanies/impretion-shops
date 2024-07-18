@@ -20,7 +20,7 @@ export default function SessionHandler({ shopRef }) {
           const session = await findOne("temporal-client-session", {
             sessionId: generatedSessionId,
           });
-          console.log(session);
+
           // if there is not session add it to the DB, then add the cookie
           if (!session) {
             try {
@@ -32,7 +32,7 @@ export default function SessionHandler({ shopRef }) {
               );
 
               // Insert a new session into the DB
-              await insertOne("temporal-client-session", {
+              const data = await insertOne("temporal-client-session", {
                 sessionId: generatedSessionId,
                 shopRef,
                 userOrder: [],
@@ -40,6 +40,7 @@ export default function SessionHandler({ shopRef }) {
                 formattedCreatedSessionDate: formattedDate,
                 hasRequestedOrder: false,
               });
+              console.log("inserted session", data);
             } catch (error) {
               console.log(error);
             }

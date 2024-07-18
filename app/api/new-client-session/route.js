@@ -18,7 +18,7 @@ export async function POST(req, res) {
     );
 
     // Insert a new session into the DB
-    const response = await insertOne("temporal-client-session-test", {
+    const response = await insertOne("temporal-client-session", {
       sessionId,
       shopRef,
       userOrder: [],

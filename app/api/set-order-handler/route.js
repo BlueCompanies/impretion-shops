@@ -1,9 +1,7 @@
-import awsS3 from "@/app/_lib/aws/awsS3";
-import deleteOne from "@/app/_lib/queries/deleteOne";
 import insertOne from "@/app/_lib/queries/insertOne";
 import updateOne from "@/app/_lib/queries/updateOne";
-import { DeleteObjectsCommand, ListObjectsV2Command } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
+import ShortUniqueId from "short-unique-id";
 
 // set runtime to Edge
 export const runtime = "edge";
@@ -24,9 +22,13 @@ export async function POST(req, res) {
     const body = await req.json();
     const { userData, userContactNumber } = body;
 
+    const uid = new ShortUniqueId({ length: 10 });
+    const orderId = uid.rnd();
+
     // Inserts a new order
     await insertOne("orders", {
       userData,
+      orderId,
       contactData: { telephone: userContactNumber },
       orderStatus: "UNPROCESSED",
       createdAt: Date.now(),

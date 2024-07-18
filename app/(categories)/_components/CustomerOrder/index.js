@@ -4,6 +4,8 @@ import Image from "next/image";
 import { deleteCookie, getCookie } from "cookies-next";
 import FieldDescription from "../FieldDescription";
 import { useRouter, useSearchParams } from "next/navigation";
+import findOne from "@/app/_lib/queries/findOne";
+import updateOne from "@/app/_lib/queries/updateOne";
 
 export default function CustomerOrder({}) {
   const [showOrderModal, setShowOrderModal] = useState(false);
@@ -22,6 +24,11 @@ export default function CustomerOrder({}) {
   useEffect(() => {
     const clientSession = getCookie("clientSession");
     if (showOrderModal && clientSession) {
+      findOne("temporal-client-session", {
+        sessionId: clientSession,
+      }).then(async (data) => {
+        setUserData(data);
+      });
       fetch("/api/temporal-session-data", {
         method: "POST",
         headers: {
@@ -30,7 +37,7 @@ export default function CustomerOrder({}) {
         body: JSON.stringify({ clientSession }),
       }).then(async (res) => {
         const data = await res.json();
-
+        console.log(data);
         setUserData(data);
       });
 
@@ -130,13 +137,14 @@ export default function CustomerOrder({}) {
   const deleteProductHandler = async (productId, index) => {
     setCurrentProductIdDeleted(productId);
     setIsDeletingLoader(true);
-    const response = await fetch("/api/delete-product-handler", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ productId }),
-    });
 
-    if (response.status === 200) {
+    const data = await updateOne(
+      "temporal-client-session",
+      { "userOrder.productId": productId }, // filter
+      { $pull: { userOrder: { productId: productId } } } // update
+    );
+
+    if (data.status === 200) {
       // Make a copy of the current userData
       const updatedUserData = { ...userData };
 

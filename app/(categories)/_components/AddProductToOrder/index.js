@@ -1,12 +1,11 @@
 "use client";
 
-import awsS3 from "@/app/_lib/aws/awsS3";
 import ShortUniqueId from "short-unique-id";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { deleteCookie, getCookie } from "cookies-next";
 import { useState } from "react";
 import NewAddedProductModal from "./_components/NewAddedProductModal";
 import Image from "next/image";
+import findOne from "@/app/_lib/queries/findOne";
 
 export default function AddProductToOrder({
   productData,
@@ -28,14 +27,10 @@ export default function AddProductToOrder({
     setShowModal(true);
 
     // Validates if the current session is on the DB yet, if there is not return a message to reload.
-    const response = await fetch("/api/temporal-session-data", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ clientSession }),
+    const data = await findOne("temporal-client-session", {
+      sessionId: clientSession,
     });
-    const data = await response.json();
+
     if (!data) {
       setError({
         status: true,

@@ -1,20 +1,26 @@
 "use server";
 
 export default async function findOne(collection, filter) {
+  const devMode = process.env.NEXT_PUBLIC_CURRENT_ENV;
+  const API_KEY = process.env.HTTP_ENDPOINTS_API_KEY;
+
+  // If development as devMode add in test/db collection (this is a temporal solution for development)
+  const databaseEnv =
+    devMode === "development" ? `impretion-shops-test` : "impretion-shops";
+
   try {
     const response = await fetch(
       `https://sa-east-1.aws.data.mongodb-api.com/app/data-lqpho/endpoint/data/v1/action/findOne`,
       {
         method: "POST",
         headers: {
-          apiKey:
-            "n5cPXyDjcNm37mcCb4mrfVPebcMSurv1dB1vJcNcAv6kaqDeQq4W0ZGGHQJTAAi1",
+          apiKey: API_KEY,
           "content-type": "application/json", // Add content-type header
           "Access-Control-Request-Headers": "*",
         },
         body: JSON.stringify({
           dataSource: "Impretion",
-          database: "impretion-shops",
+          database: databaseEnv,
           collection,
           filter,
         }),

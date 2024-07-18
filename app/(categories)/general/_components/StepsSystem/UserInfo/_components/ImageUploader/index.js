@@ -40,20 +40,28 @@ export default function ImageUploader({ setUserData, userData }) {
 
         try {
           setImageLoading(true);
+          const clientSession = getCookie("clientSession");
+
           const uid = new ShortUniqueId({ length: 10 });
           const generatedId = uid.rnd();
-          const clientSession = getCookie("clientSession");
+
+          const devMode = process.env.NEXT_PUBLIC_CURRENT_ENV;
+          const bucketKeyEnv =
+            devMode === "development"
+              ? `impretion-shops-test/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`
+              : `impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`;
+
           // Create the PutObjectCommand
           let command = new PutObjectCommand({
             Bucket: "impretion",
-            Key: `impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`,
+            Key: bucketKeyEnv,
             Body: arrayBuffer,
           });
 
           // Upload the image to S3
           await awsS3().send(command);
 
-          const generatedUrl = `https://xyzstorage.store/impretion-shops/user-temp-sessions-files/${clientSession}/images/${generatedId}.jpeg`;
+          const generatedUrl = `https://xyzstorage.store/${bucketKeyEnv}`;
 
           // Create a URL for the image to display in the img tag
           setUserData({ ...userData, image: generatedUrl });

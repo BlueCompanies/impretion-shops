@@ -26,6 +26,7 @@ export default function SelectedProduct({
   const clientSession = getCookie("clientSession");
   const router = useRouter();
   const searchParams = useSearchParams();
+  const devMode = process.env.NEXT_PUBLIC_CURRENT_ENV;
 
   /*
   useEffect(() => {
@@ -86,6 +87,7 @@ export default function SelectedProduct({
             productType: productRawName,
             sessionId: clientSession,
             additionalScript,
+            ...(devMode === "development" && { devEnv: true }),
           }),
         }
       );
