@@ -10,7 +10,7 @@ export const runtime = "edge";
 export async function POST(req, res) {
   try {
     const body = await req.json();
-    const { userData, userContactNumber } = body;
+    const { userData, userContactNumber, shopRef } = body;
 
     const uid = new ShortUniqueId({ length: 10 });
     const orderId = uid.rnd();
@@ -28,8 +28,10 @@ export async function POST(req, res) {
       orderId,
       contactData: { telephone: userContactNumber },
       orderStatus: "UNPROCESSED",
-      createdAt: Date.now(),
-      formattedOrderDate: formattedDate,
+      date: {
+        createdAt: new Date(),
+        formattedOrderDate: formattedDate,
+      },
     });
 
     // hasRequestedOrder is set to "true" so the is it possible to identify the users that already ordered.
@@ -37,6 +39,18 @@ export async function POST(req, res) {
       "temporal-client-session",
       { sessionId: userData.sessionId },
       { $set: { hasRequestedOrder: true } }
+    );
+
+    await updateOne(
+      "affiliated-shops",
+      { shopRef },
+      {
+        $inc: {
+          "shopSalesStatisticsData.allTime.totalRequests": 1,
+          "shopSalesStatisticsData.weekly.weeklyRequests": 1,
+          "shopSalesStatisticsData.monthly.monthlyRequests": 1,
+        },
+      }
     );
 
     return NextResponse.json({}, { status: 200 });

@@ -175,7 +175,7 @@ export default function CustomizeWindow({
                   </div>
                 )}
                 <Image
-                  src={imageUrl || productData?.productImagePlaceholder}
+                  src={imageUrl || productData?.imagePlaceholder}
                   width={250}
                   height={250}
                   style={{ position: "relative", zIndex: -2 }}

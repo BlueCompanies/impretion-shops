@@ -72,28 +72,26 @@ export default function SelectedProduct({
       setDesignUrl(designUrl);
       setFact(generalFacts[Math.floor(Math.random() * 50)].fact);
       const { productRawName } = productData;
-      const designPSDUrl = `https://xyzstorage.store/impretion-shops/designs/${psdDesigns}/${productData.productRawName}/${designPSDId}.psd`;
+      const designPSDUrl = `https://xyzstorage.store/impretion-shops/designs/${psdDesigns}/${productData.rawName}/${designPSDId}.psd`;
 
-      const response = await fetch(
-        "https://srv547224.hstgr.cloud/mockup-generator",
-        {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            name: userData.name,
-            image: userData.image,
-            designPSDUrl,
-            designs: psdDesigns,
-            productType: productRawName,
-            sessionId: clientSession,
-            additionalScript,
-            ...(devMode === "development" && { devEnv: true }),
-          }),
-        }
-      );
+      const response = await fetch("/api/proxy/mockup-generator", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: userData.name,
+          image: userData.image,
+          designPSDUrl,
+          designs: psdDesigns,
+          productType: productRawName,
+          sessionId: clientSession,
+          additionalScript,
+          ...(devMode === "development" && { devEnv: true }),
+        }),
+      });
 
       if (response.status === 200) {
-        const mockupUrl = await response.text();
+        const mockupUrl = await response.json();
+
         setImageUrl(mockupUrl);
       } else {
         alert("Ha ocurrido un error!");

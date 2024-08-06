@@ -22,12 +22,12 @@ export default function ProductsList({
       >
         <Product
           productData={{
-            productRawName: "mug",
-            productFullName: "Taza de cerámica 325 ml",
-            productPrice: 16000,
-            productImageUrl:
+            rawName: "mug",
+            fullName: "Taza de cerámica 325 ml",
+            priceData: { salePrice: 17000, basePrice: 3500, profit: 13500 },
+            imageUrl:
               "https://xyzstorage.store/products%2Fmugs%2F64ef87cba6fe6b117e7aaab6%2Fpreviews%2Fmug(v2).png",
-            productImagePlaceholder:
+            imagePlaceholder:
               "https://xyzstorage.store/products%2Fmugs%2F64ef87cba6fe6b117e7aaab6%2Fpreviews%2Fimpretion-shops_products-placeholder_mug-placeholder.webp",
           }}
           productUIType={1}
@@ -41,12 +41,12 @@ export default function ProductsList({
 
         <Product
           productData={{
-            productRawName: "colored-mug",
-            productFullName: "Taza de cerámica colorida 325 ml",
-            productPrice: 18000,
-            productImageUrl:
+            rawName: "colored-mug",
+            fullName: "Taza de cerámica colorida 325 ml",
+            priceData: { salePrice: 19000, basePrice: 5500, profit: 13500 },
+            imageUrl:
               "https://xyzstorage.store/products%2Fmugs%2F66512ac2258a35db2bf5788f%2Fimages%2Fcolored-mug.webp",
-            productImagePlaceholder:
+            imagePlaceholder:
               "https://xyzstorage.store/products%2Fmugs%2F66512ac2258a35db2bf5788f%2Fimages%2Fcolored-mug-placeholder%20.webp",
           }}
           productUIType={2}
@@ -60,12 +60,12 @@ export default function ProductsList({
 
         <Product
           productData={{
-            productRawName: "magic-mug",
-            productFullName: "Taza de mágica 325 ml",
-            productPrice: 22000,
-            productImageUrl:
+            rawName: "magic-mug",
+            fullName: "Taza de mágica 325 ml",
+            priceData: { salePrice: 23000, basePrice: 7000, profit: 16000 },
+            imageUrl:
               "https://xyzstorage.store/products%2Fmugs%2F652e32dfbcfee2bb108da386%2Fpreviews%2Fmagicmug.webp",
-            productImagePlaceholder:
+            imagePlaceholder:
               "https://xyzstorage.store/products%2Fmugs%2F652e32dfbcfee2bb108da386%2Fpreviews%2Fmagicmug-placeholder.webp",
           }}
           productUIType={1}

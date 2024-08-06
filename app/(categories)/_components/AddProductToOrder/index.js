@@ -89,10 +89,14 @@ export default function AddProductToOrder({
             image: userData.image,
             name: userData.name,
           },
-          productRawName: productData?.productRawName,
-          productFullName: productData?.productFullName,
-          productPrice: productData?.productPrice,
-          productMockupPreview: imageUrl,
+          rawName: productData?.rawName,
+          fullName: productData?.fullName,
+          priceData: {
+            salePrice: productData?.priceData.salePrice,
+            basePrice: productData?.priceData.basePrice,
+            profit: productData?.priceData.profit,
+          },
+          mockupPreview: imageUrl,
         },
       }),
     });

@@ -30,7 +30,7 @@ export default function Product({
             width={100}
             height={100}
             objectFit="cover"
-            src={productData?.productImageUrl}
+            src={productData?.imageUrl}
           ></Image>
         </div>
         <div

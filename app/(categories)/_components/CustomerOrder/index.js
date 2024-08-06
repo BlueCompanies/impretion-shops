@@ -37,7 +37,7 @@ export default function CustomerOrder({}) {
         body: JSON.stringify({ clientSession }),
       }).then(async (res) => {
         const data = await res.json();
-        console.log(data);
+
         setUserData(data);
       });
 
@@ -88,6 +88,9 @@ export default function CustomerOrder({}) {
 
   const orderHandler = async () => {
     if (userData?.userOrder?.length > 0) {
+      // Gets the current shop reference code
+      const shopRef = searchParams.get("shopRef");
+
       const clientSession = getCookie("clientSession");
       if (!clientSession) {
         setSessionExpired(true);
@@ -102,7 +105,7 @@ export default function CustomerOrder({}) {
       const response = await fetch("/api/set-order-handler", {
         method: "POST",
         headers: { ContentType: "application/json" },
-        body: JSON.stringify({ userData, userContactNumber }),
+        body: JSON.stringify({ userData, userContactNumber, shopRef }),
       });
 
       if (response.status === 200) {
@@ -162,7 +165,7 @@ export default function CustomerOrder({}) {
   // Calculate total price
   const totalPrice =
     userData?.userOrder?.reduce(
-      (total, order) => total + parseFloat(order?.productPrice),
+      (total, order) => total + parseFloat(order?.priceData.salePrice),
       0
     ) || 0;
 
@@ -307,10 +310,10 @@ export default function CustomerOrder({}) {
                     }}
                   >
                     <Image
-                      src={product?.productMockupPreview}
+                      src={product?.mockupPreview}
                       width={100}
                       height={100}
-                      alt={product?.productMockupPreview}
+                      alt={product?.mockupPreview}
                       quality={1}
                     />
                     <div
@@ -320,9 +323,9 @@ export default function CustomerOrder({}) {
                       }}
                     >
                       <p style={{ fontWeight: 700, fontSize: "14px" }}>
-                        {product?.productFullName}
+                        {product?.fullName}
                       </p>
-                      <p>{product?.productPrice} COP</p>
+                      <p>{product?.priceData.salePrice} COP</p>
                       <button
                         style={{
                           width: "100px",
@@ -451,6 +454,11 @@ export default function CustomerOrder({}) {
             )}
 
             <FieldDescription marginTop={"10px"}>
+              <span
+                style={{ fontSize: "14px", display: "block", fontWeight: 700 }}
+              >
+                ¡Paga después!
+              </span>
               Nos pondremos en contacto contigo para organizar el envío y
               acordar el pago de los productos.
             </FieldDescription>

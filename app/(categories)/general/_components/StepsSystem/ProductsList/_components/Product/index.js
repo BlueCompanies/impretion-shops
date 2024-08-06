@@ -34,7 +34,7 @@ export default function Product({
             width={100}
             height={100}
             objectFit="cover"
-            src={productData?.productImageUrl}
+            src={productData?.imageUrl}
           ></Image>
         </div>
         <div
@@ -47,9 +47,11 @@ export default function Product({
             alignItems: "center",
           }}
         >
-          <p style={{ fontSize: "13px" }}>{productData?.productFullName}</p>
+          <p style={{ fontSize: "13px" }}>{productData?.fullName}</p>
 
-          <p style={{ margin: "5px" }}>{productData?.productPrice} COP</p>
+          <p style={{ margin: "5px" }}>
+            {productData?.priceData.salePrice} COP
+          </p>
           <Suspense fallback="loading...">
             <SelectedProduct
               productData={productData}
