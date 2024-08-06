@@ -91,7 +91,7 @@ export default function SelectedProduct({
 
       if (response.status === 200) {
         const mockupUrl = await response.json();
-
+        console.log(mockupUrl);
         setImageUrl(mockupUrl);
       } else {
         alert("Ha ocurrido un error!");
@@ -160,7 +160,7 @@ export default function SelectedProduct({
     const searchParams = new URLSearchParams(currentUrl.search);
 
     // Add or update the 'product' parameter
-    searchParams.set("product", productData.productRawName);
+    searchParams.set("product", productData.rawName);
 
     // Update the URL without navigating
     router.push(`${currentUrl.pathname}?${searchParams.toString()}`, {
